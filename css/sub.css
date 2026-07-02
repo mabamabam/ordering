@@ -23,6 +23,24 @@ body {height: auto;}
     transition: transform 0.08s linear;
 }
 
+
+
+/* 배경 */
+.bg{
+    position:fixed;
+    inset:0;
+    background:url(../img/yellowmabam.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    will-change: transform;
+    mix-blend-mode: multiply;
+    z-index: -1;
+    transition: 1s ease;
+}
+
+
+
 /* 화면분할 */
 .container {
     display: flex;
@@ -31,18 +49,6 @@ body {height: auto;}
 }
 
 .left-panel {
-  width: 35%;
-  height: auto;
-
-  /* 각각 독립 스크롤 */
-  overflow-y: auto;
-  overflow-x: hidden;
-
-  /* iOS 부드러운 스크롤 */
-  -webkit-overflow-scrolling: touch;
-}
-
-.right-panel {
   width: 65%;
   height: auto;
 
@@ -54,8 +60,19 @@ body {height: auto;}
   -webkit-overflow-scrolling: touch;
 }
 
-/* 스크롤바 숨기기 */
+.right-panel {
+  width: 35%;
+  height: auto;
 
+  /* 각각 독립 스크롤 */
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  /* iOS 부드러운 스크롤 */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 스크롤바 숨기기 */
 /* Chrome, Safari, Edge */
 .left-panel::-webkit-scrollbar,
 .right-panel::-webkit-scrollbar {
@@ -73,6 +90,9 @@ body {height: auto;}
 .right-panel {
   -ms-overflow-style: none;
 }
+
+
+
 
 section {
     margin-top: 200px;
@@ -111,7 +131,6 @@ header {
     justify-content: space-between;
     align-items: center;
     letter-spacing: -5%;
-    background-color: #f6f6f680;
     z-index: 9999;
 }
 
@@ -221,7 +240,6 @@ body {
     display: block;
     position: relative;
     right: 0;
-    margin-left: 45px;
     margin-bottom: 20px;
 }
 
@@ -379,4 +397,282 @@ body {
 
 .textbox {
     margin-left: 100px;
+}
+
+
+
+
+
+
+#main_resume {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+}
+
+.box12 {
+    width: 50%;
+    height: 700px;
+    background-color: #4B78FF;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.box12:hover {
+    animation: shake-jelly 1s ease;
+}
+
+/* 
+@keyframes shake {
+    0%   { transform: translateX(0); }
+    10%  { transform: translateX(-3px) rotate(-2deg); }
+    20%  { transform: translateX(3px) rotate(2deg); }
+    30%  { transform: translateX(-3px) rotate(-2deg); }
+    40%  { transform: translateX(3px) rotate(2deg); }
+    50%  { transform: translateX(-2px) rotate(-1deg); }
+    60%  { transform: translateX(2px) rotate(1deg); }
+    70%  { transform: translateX(-2px) rotate(-1deg); }
+    80%  { transform: translateX(2px) rotate(1deg); }
+    90%  { transform: translateX(-1px); }
+    100% { transform: translateX(0); }
+  } */
+
+@keyframes shake-jelly {
+    0% { transform: rotate(0); }
+    15% { transform: rotate(-8deg); }
+    30% { transform: rotate(6deg); }
+    45% { transform: rotate(-4deg); }
+    60% { transform: rotate(3deg); }
+    75% { transform: rotate(-2deg); }
+    100% { transform: rotate(0); }
+}
+
+
+
+
+/* footer */
+footer {
+    width: auto;
+    height: 90px;
+    padding: 0px 30px;
+    margin-top: 162px;
+    /* background-color: #4B78FF; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-style: italic;
+}
+
+
+
+
+
+
+
+/* 반응형 */
+@media (max-width: 500px) {
+
+    /* 스크롤 숨기기 */
+    html::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Firefox */
+    html {
+    scrollbar-width: none;
+    }
+
+    /* IE */
+    html{
+    -ms-overflow-style: none;
+    }
+
+    header>a {
+        font-weight: 800;
+        font-size: 15px;
+    }
+
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        padding: 0 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        letter-spacing: -5%;
+        z-index: 9999;
+    }
+
+    #header {
+        width: 70%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    #header>a {
+        display: block;
+        font-weight: 700;
+        font-size: 15px;
+    }
+
+    #header>a:hover {
+        transition: all 0.2s ease;
+        color: #4B78FF;
+    }
+
+    h1 {
+        font-size: 24px;
+        position: relative;
+        line-height: 30px;
+    }
+
+    h2 {
+        font-size: 18px;
+        width: fit-content;
+    }
+
+    .type2 {
+        font-weight: 500;
+    }
+
+    h3 {
+        font-size: 20px;
+        font-weight: 600;
+        color: #f6f6f650;
+    }
+
+    h3>a {
+        color: #f6f6f688;
+    }
+
+    h3>a:hover {
+        color: #f6f6f6;
+    }
+
+    h4 {
+        font-size: 24px;
+        margin-bottom: 5px;
+    }
+
+    h5 {
+        font-size: 20px;
+        line-height: 32px;
+    }
+
+
+    h6 {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 25px;
+        margin-top: 10px;
+    }
+
+    p {
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 28px;
+    }
+
+    .exlist {
+        font-size: 16px;
+        margin: 11px 0;
+    }
+
+    .explain {
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .menu {
+        padding: 0 35px;
+        margin-bottom: 70px;
+    }
+
+    .option {
+        padding: 45px 45px;
+    }
+
+    .hoverevent>p {
+        display: none;
+    }
+
+    .colorbox {
+        padding: 45px 50px;
+    }
+
+    .textbox {
+        margin-left: 8%;
+    }
+
+    .option>h1, .afteryou {
+        margin: 18px 0;
+    }
+
+    .ordering {
+        height: auto;
+        display: flex;
+        justify-content: left;
+        margin-bottom: 0px;
+    }
+
+    .inboxtext {
+        font-size: 30px;
+        font-weight: 700;
+        z-index: 99;
+    }
+
+    .container {
+        display: block;
+        width: 100vw;
+        height: auto;
+    }
+
+    .left-panel {
+        width: 100%;
+        height: auto;
+
+        /* 각각 독립 스크롤 */
+        overflow: visible;
+        overflow-y: visible;
+        overflow-x: visible;
+    }
+
+    .right-panel {
+        width: 100%;
+        height: auto;
+
+        /* 각각 독립 스크롤 */
+        overflow: visible;
+        overflow-y: visible;
+        overflow-x: visible;
+    }
+
+    html, body {
+        overflow: visible;
+    }
+
+    .title {
+        margin-left: 45px;
+        margin-bottom: 30px;
+    }
+
+    .right-panel {
+        margin-top: 70px;
+    }
+
+    .textbox {
+        line-height: 26px;
+    }
+
+
+    
 }
