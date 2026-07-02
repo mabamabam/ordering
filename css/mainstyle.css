@@ -1,6 +1,23 @@
 * {padding: 0; margin: 0; letter-spacing: -6%; box-sizing: border-box;}
 a {text-decoration: none; color: #222;}
 
+
+/* 스크롤 숨기기 */
+html::-webkit-scrollbar {
+    display: none;
+}
+
+/* Firefox */
+html {
+  scrollbar-width: none;
+}
+
+/* IE */
+html{
+  -ms-overflow-style: none;
+}
+
+
 /* 마우스 */
 .cursor-glow{
     position: fixed;
@@ -308,4 +325,124 @@ footer {
     justify-content: space-between;
     align-items: center;
     font-style: italic;
+}
+
+
+
+
+
+
+
+/* 반응형 */
+@media (max-width: 500px) {
+    header>a {
+        font-weight: 800;
+        font-size: 15px;
+    }
+
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        padding: 0 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        letter-spacing: -5%;
+        z-index: 9999;
+    }
+
+    #header {
+        width: 70%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    #header>a {
+        display: block;
+        font-weight: 700;
+        font-size: 15px;
+    }
+
+    #header>a:hover {
+        transition: all 0.2s ease;
+        color: #4B78FF;
+    }
+
+    h1 {
+        font-size: 30px;
+        font-style: italic;
+    }
+
+    h2 {
+        font-size: 18px;
+
+    }
+
+    .type2 {
+        font-weight: 500;
+    }
+
+    h3 {
+        font-size: 20px;
+        font-weight: 600;
+        color: #f6f6f650;
+    }
+
+    h3>a {
+        color: #f6f6f688;
+    }
+
+    h3>a:hover {
+        color: #f6f6f6;
+    }
+
+    h4 {
+        font-size: 24px;
+        margin-bottom: 5px;
+    }
+
+    .align {
+        padding: 0 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .lighter {
+        padding: 0 10px;
+        font-size: 21px;
+        font-weight: 400;
+        color: #22222280;
+    }
+
+    /* main_resume */
+    #main_resume {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .box12 {
+        width: 50%;
+        height: 400px;
+        background-color: #4B78FF;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .box12:hover {
+        animation: shake-jelly 1s ease;
+    }
+
+
+
 }
