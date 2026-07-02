@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function(){
     // done area
     const archiveData = [
 
-        {
+               {
             thumbnail: "archive/cover1.png",
             modalImage: "archive(2)/1.jpg",
             title: "Icarus",
@@ -100,31 +100,31 @@ document.addEventListener("DOMContentLoaded", function(){
         },
         {
             thumbnail: "archive/cover15.png",
-            modalImage: "archive(2)/3.jpg",
+            modalImage: "archive(2)/15.jpg",
             title: "Wildest Dreams",
             description: "A5"
         },
         {
             thumbnail: "archive/cover25.png",
-            modalImage: "archive/full03.jpg",
+            modalImage: "archive(2)/25.jpg",
             title: "TRIPLE",
             description: "A5 | 장표지 (A)"
         },
         {
             thumbnail: "archive/cover9.png",
-            modalImage: "archive(2)/3.jpg",
+            modalImage: "archive(2)/9.jpg",
             title: "Find our way to love ending",
             description: "A5"
         },
         {
             thumbnail: "archive/cover22.png",
-            modalImage: "archive(2)/3.jpg",
+            modalImage: "archive(2)/22.jpg",
             title: "무덤팔아 부르주암",
             description: "A5"
         },
         {
             thumbnail: "archive/cover13.png",
-            modalImage: "archive(2)/3.jpg",
+            modalImage: "archive(2)/13.jpg",
             title: "Lucky Strike",
             description: "A5 | 목차 및 장표지 (A)"
         },
@@ -148,31 +148,31 @@ document.addEventListener("DOMContentLoaded", function(){
         },
         {
             thumbnail: "archive/cover14.png",
-            modalImage: "archive(2)/3.jpg",
+            modalImage: "archive(2)/14.jpg",
             title: "99.9% 토마토 주스 공급 사건",
             description: "A5 | 약표제지"
         },
         {
             thumbnail: "archive/cover17.png",
-            modalImage: "archive(2)/3.jpg",
+            modalImage: "archive(2)/17.jpg",
             title: "비정형 메타포",
             description: "B6"
         },
         {
             thumbnail: "archive/cover21.png",
-            modalImage: "archive(2)/3.jpg",
+            modalImage: "archive(2)/21.jpg",
             title: "가랑눈 내리는 집",
             description: "B6 | 중철"
         },
         {
             thumbnail: "archive/cover23.png",
-            modalImage: "archive(2)/3.jpg",
+            modalImage: "archive(2)/23.jpg",
             title: "황금시간",
             description: "A5 | 중철"
         },
         {
             thumbnail: "archive/cover6.png",
-            modalImage: "archive(2)/3.jpg",
+            modalImage: "archive(2)/6.jpg",
             title: "소년찬가",
             description: "A5 | 책날개 | 레이아웃 변경 | 목차 및 장표지 | 책갈피 굿즈"
         },
@@ -184,13 +184,13 @@ document.addEventListener("DOMContentLoaded", function(){
         },
         {
             thumbnail: "archive/cover28.png",
-            modalImage: "archive/full02.jpg",
+            modalImage: "archive(2)/28.jpg",
             title: "폴리에스터 하트",
             description: "B6 | 약표제지"
         },
         {
             thumbnail: "archive/cover18.png",
-            modalImage: "archive(2)/3.jpg",
+            modalImage: "archive(2)/18.jpg",
             title: "녹청의 하루는 오늘도 바쁘게 움직인다",
             description: "B6"
         },
@@ -220,7 +220,7 @@ document.addEventListener("DOMContentLoaded", function(){
         },
         {
             thumbnail: "archive/cover32.png",
-            modalImage: "archive/full02.jpg",
+            modalImage: "archive(2)/32.jpg",
             title: "관외대출",
             description: "<b>일러스트 편집 커미션</b> | 비판형 | 장표지"
         },
