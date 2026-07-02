@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function(){
             const y = window.scrollY;
 
             document.querySelector(".bg").style.transform =
-                `translateY(${y * 0.2}px)`;
+                `translateY(${y * 0.15}px)`;
         });
 
         
