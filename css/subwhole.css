@@ -367,7 +367,7 @@ body {
     transition: 1s ease;
 }
 
-.hoverevent:hover>p {
+.hoverevent:hover>p, .hoverevent:hover>h2 {
     display: none;
 }
 
@@ -459,13 +459,14 @@ body {
     overflow: hidden;
 }
 
-.pageoptionbox {
+.pagebox {
     width: 100%;
     height: auto;
     overflow: hidden;
+    margin-top: 45px;
 }
 
-.pageoptionbox>img {
+.pagebox>img {
     width: 100%;
     display: block;
     border: none;
@@ -516,6 +517,11 @@ body {
     background-color: #ddff4d;
     overflow: hidden;
 }
+
+    /* page */
+    .pageoptionbox {
+        padding: 45px 100px;
+    }
 
 .type1 {
     background:url(../img/type1\(3\)_1.png);
@@ -791,7 +797,7 @@ footer {
     }
 
     .option {
-        padding: 35px 25px;
+        padding: 25px 25px;
     }
 
     .hoverevent>p {
@@ -811,7 +817,7 @@ footer {
     }
 
     .ordering {
-        height: 700px;
+        height: 600px;
         display: flex;
         justify-content: left;
         margin-bottom: 500px;
@@ -828,6 +834,8 @@ footer {
         margin-left: -20px;
     }
 
+
+
     /* mockup */
     .tied {
         display: grid;
@@ -840,6 +848,31 @@ footer {
         width: 100%;
     }
 
+    .hoverevent:hover>p {
+        display: none;
+    }
+
+    .hoverevent:hover>h2 {
+        display: block;
+    }
+
+    .mockupoption {
+        padding: 50px 0;
+    }
+
+    .mockupoption>h1 {
+        margin-left: 25px;
+    }
+
+
+    /* page */
+    .pageoptionbox {
+        padding: 25px 0;
+    }
+
+    .pageoptionbox>h1, .pageoptionbox>h6 {
+        padding: 0 25px;
+    }
 
 
     /* main */
@@ -851,7 +884,7 @@ footer {
     .box {
         width: 100%;
         height: auto;
-        padding: 10px 30px;
+        padding: 18px 30px;
         background-color: #ddff4d;
         overflow: hidden;
     }
@@ -1068,7 +1101,7 @@ footer {
     }
 
     .option {
-        padding: 35px 45px;
+        padding: 45px 45px;
     }
 
     .hoverevent>p {
@@ -1088,7 +1121,7 @@ footer {
     }
 
     .ordering {
-        height: 700px;
+        height: 600px;
         display: flex;
         justify-content: left;
         margin-bottom: 500px;
@@ -1104,6 +1137,8 @@ footer {
         line-height: 26px;
     }
 
+
+
     /* mockup */
     .tied {
         display: grid;
@@ -1117,6 +1152,16 @@ footer {
     }
     
 
+
+
+    /* page */
+    .pageoptionbox {
+        padding: 45px 0;
+    }
+
+    .pageoptionbox>h1, .pageoptionbox>h6 {
+        padding: 0 45px;
+    }
 
 
 
