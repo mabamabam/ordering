@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function(){
         // readymade gallery
         const gallery = document.getElementById("gallery");
         const galleryData = [
-           {unsold: "images/black/15.jpg"},
+            {unsold: "images/black/15.jpg"},
             {unsold: "images/black/73.jpg"},
             {unsold: "images/black/85.jpg"},
             {unsold: "images/black/58.jpg"},
@@ -50,7 +50,6 @@ document.addEventListener("DOMContentLoaded", function(){
             {unsold: "images/yell/47.jpg"},
             {unsold: "images/yell/114.jpg"},
             {unsold: "images/yell/22.jpg"},
-
             {unsold: "images/green/12.jpg"},
             {unsold: "images/green/21.jpg"},
             {unsold: "images/green/66.jpg"},
@@ -62,8 +61,6 @@ document.addEventListener("DOMContentLoaded", function(){
             {unsold: "images/green/62.jpg"},
             {unsold: "images/green/31.jpg"},
             {unsold: "images/green/102.jpg"},
-
-
             {unsold: "images/blue/95.jpg"},
             {unsold: "images/blue/28.jpg"},
             {unsold: "images/blue/111.jpg"},
@@ -84,7 +81,6 @@ document.addEventListener("DOMContentLoaded", function(){
             {unsold: "images/blue/3.jpg"},
             {unsold: "images/blue/105.jpg"},
             {unsold: "images/blue/99.jpg"},
-            
             {unsold: "images/white/113.jpg"},
             {unsold: "images/white/115.jpg"},
             {unsold: "images/white/104.jpg"},
@@ -97,7 +93,6 @@ document.addEventListener("DOMContentLoaded", function(){
             {unsold: "images/red/56.jpg"},
             {unsold: "images/red/96.jpg"},
             {unsold: "images/red/93.jpg"},
-            
             {unsold: "images/red/7.jpg"},
             {unsold: "images/red/78.jpg"},
             {unsold: "images/red/68.jpg"},
