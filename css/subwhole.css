@@ -192,7 +192,7 @@ section>h1 {
     display: block;
     aspect-ratio: 7/10;
     object-fit: cover;
-    border-radius: 5px;
+    border-radius: 2px;
     box-shadow: 0px 0px 12px #b8d33f40;
 }
 
@@ -223,20 +223,15 @@ section>h1 {
     display:none;
     justify-content:center;
     align-items:center;
-    z-index:1000;
+    z-index:2000;
 }
 
 .modal.active {
     display:flex;
 }
 
-.modal-image{
-    max-width:80%;
-    max-height:80%;
-}
-
 #modalImage {
-    width: 70%;
+    width: 60%;
     display: block;
 }
 
@@ -411,6 +406,21 @@ body {
 .postcard:hover {
     background:url(../img/postcard1.png);
     background-size: 150%;
+    background-position-x: center;
+    background-position-y: center;
+    transition: 1s ease;
+}
+
+.poster {
+    background:url(../img/poster2.jpg);
+    background-size: 150%;
+    background-position-x: center;
+    background-position-y: center;
+}
+
+.poster:hover {
+    background:url(../img/poster1.jpeg);
+    background-size: 200%;
     background-position-x: center;
     background-position-y: center;
     transition: 1s ease;
@@ -870,7 +880,7 @@ footer {
 
 
     /* main */
-    .commission, .commission:hover, .illust, .illust:hover, .mockup, .mockup:hover, .postcard, .postcard:hover, .bookmark, .bookmark:hover {
+    .commission, .commission:hover, .poster, .poster:hover, .illust, .illust:hover, .mockup, .mockup:hover, .postcard, .postcard:hover, .bookmark, .bookmark:hover {
         background:none;
         background-color: #ddff4d;
     }
@@ -910,7 +920,7 @@ footer {
         display: block;
         aspect-ratio: 7/10;
         object-fit: cover;
-        border-radius: 5px;
+        border-radius: 2px;
         box-shadow: 0px 0px 12px #b8d33f40;
     }
 
@@ -948,11 +958,6 @@ footer {
         display:flex;
     }
 
-    .modal-image{
-        max-width:80%;
-        max-height:80%;
-    }
-
     .modal-close { 
         position:absolute; 
         top:30px; 
@@ -973,6 +978,26 @@ footer {
         display: block;
     }
 
+    .box2piece, .box3piece {
+        display: block;
+    }
+
+    .box2piece>.box {
+        width: 100%;    
+    }
+
+    .box3piece>.box {
+        width: 100%;    
+    }
+
+    .box2piece>.box, .box3piece>.box {
+        display: block;
+        padding: 10px 15px;
+    }
+
+    .box:first-child {
+        height: auto;
+    }
     
 }
 
@@ -1186,7 +1211,7 @@ footer {
         display: block;
         aspect-ratio: 7/10;
         object-fit: cover;
-        border-radius: 5px;
+        border-radius: 2px;
         box-shadow: 0px 0px 12px #b8d33f40;
     }
 
@@ -1222,11 +1247,6 @@ footer {
 
     .modal.active {
         display:flex;
-    }
-
-    .modal-image{
-        max-width:80%;
-        max-height:80%;
     }
 
     .modal-close { 
