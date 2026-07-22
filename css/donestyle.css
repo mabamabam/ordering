@@ -680,7 +680,7 @@ button {
     .modal-panel {
         max-height: 90%;
         overflow: auto;
-        padding: 30px;
+        padding: 20px;
     }
 
     .section-title {
