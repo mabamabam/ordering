@@ -576,6 +576,10 @@ button {
         margin: 0 auto;
     }
 
+    .modal-panel {
+        padding: 10px;
+    }
+
     .book { height: 160px; --spine-h: 160px; }
     .book-title { font-size: 0.78rem; }
     .book-author { font-size: 0.64rem; }
