@@ -4,20 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="css/donestyle.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/subwhole.css" type="text/css">
     <link rel="icon" href="img/mabam.svg" type="image/x-icon">
     <link rel="shortcut icon" href="img/mabam.svg" type="image/x-icon">
     <title>mabamabam</title>
-    <script src="js/javascript.js"></script>
 </head>
 <body>
     <div class="cursor-glow"></div>
     <div class="bg"></div>
 
-    
-    <header>
+  <header>
         <a href="index.html">mabamabam</a>
         <div id="header">
             <a href="commission.html">Commission</a>
@@ -33,19 +31,64 @@
             <a href="mockup.html">📙</a>
             <a href="done.html">📚</a>
         </div>
-    </header>
-    <div class="container">
-        <section>
-            <h1>지난 작업물</h1>
-            <section class="archive-grid" id="archiveGrid"></section>
-        </section>
+  </header>
 
-        <!-- 팝업 -->
-        <div class="modal" id="modal">
-            <span class="close">&times;</span>
-            <img id="modalImage" />
+  <main id="top">
+
+    <!-- 1. 지난 작업물 (책장) -->
+    <section class="section shelf-section" id="shelf">
+      <div class="section-inner">
+        <h1 class="section-title">지난 작업물</h1>
+        <p class="section-desc">
+          책장에 마우스를 올려 작업물의 목업과 실제 사진들을 확인해보세요! </br>
+          (왼쪽으로 갈수록 최신 / 흑색책 → 옵션추가 혹은 커미션 / 청색책 → 내지 샘플 O)
+        </p>
+        <div class="shelf-wrap">
+          <div class="shelf-track" id="shelfTrack" aria-label="책장">
+            <!-- 책 컴포넌트는 JS로 생성됩니다 -->
+          </div>
+          <div class="shelf-board" aria-hidden="true"></div>
         </div>
+          <p class="hint">
+            고정된 창을 보고 싶으신 분들은 브라우저 크기를 줄인 뒤 새로고침!
+          </p>
+      </div>
+    </section>
+
+      <section class="section slide-section" id="commission">
+      <div class="section-inner">
+        <h1 class="section-title">커미션</h1>
+        <p class="section-desc">작업이 완료된 커미션 샘플</p>
+            <div class="checkgrid">
+              <img src="img/커미션1.jpg"></img>
+              <img src="img/커미션2.jpg"></img>
+              <img src="img/커미션3.jpg"></img>
+              <img src="img/커미션8.jpg"></img>
+              <img src="img/커미션4.jpg"></img>
+              <!-- <img src="img/커미션5(1).jpg"></img>
+              <img src="img/커미션5(2).jpg"></img>
+              <img src="img/커미션7.jpg"></img> -->
+            </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 책 상세 모달 -->
+  <div class="modal" id="bookModal" aria-hidden="true">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel" role="dialog" aria-modal="true">
+      <button class="modal-close" data-close aria-label="닫기">&times;</button>
+      <div class="modal-image-wrap">
+        <img class="modal-image" id="modalImage" src="" alt="">
+      </div>
+      <div class="modal-info">
+        <h3 id="modalTitle"></h3>
+        <p id="modalContext"></p>
+      </div>
     </div>
-    <footer></footer>
+  </div>
+
+  <script src="js/script.js"></script>
 </body>
 </html>
