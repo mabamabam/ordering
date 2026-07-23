@@ -329,7 +329,7 @@ body {
 }
 
 .type1 {
-    background:url(../img/type1\(3\)_1.png);
+    background:url(../img/type1\(3\)_blur.webp);
     background-size: 100%;
     background-position-x: center;
     background-position-y: center;
@@ -337,7 +337,7 @@ body {
 }
 
 .type1:hover {
-    background:url(../img/type1\(3\).png);
+    background:url(../img/type1\(3\).webp);
     background-size: 120%;
     background-position-x: center;
     background-position-y: center;
@@ -345,7 +345,7 @@ body {
 }
 
 .type2 {
-    background:url(../img/type2\(1\)_1.png);
+    background:url(../img/type2\(1\)_blur.webp);
     background-size: 100%;
     background-position-x: center;
     background-position-y: center;
@@ -353,7 +353,7 @@ body {
 }
 
 .type2:hover {
-    background:url(../img/type2\(1\).png);
+    background:url(../img/type2\(1\).webp);
     background-size: 120%;
     background-position-x: center;
     background-position-y: center;
