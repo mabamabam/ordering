@@ -51,9 +51,6 @@
   // 마우스가 있는 PC 환경인지 판별 (true면 호버로 오픈, false면 모바일처럼 탭/클릭으로 오픈)
   const isHoverCapable = window.matchMedia('(min-width: 1200px)').matches;
 
-  // 책장을 드래그로 스크롤하는 동안에는 지나가는 책마다 팝업이 뜨지 않도록 공유하는 플래그
-  let isShelfDragging = false;
-
   // 책장 데이터 (원래 data/books.json 이었던 내용을 그대로 옮겨온 것)
   const BOOKS_DATA = [
     // { title: "망사랑이 딱 좋아!", author: "앤솔로지", spine: 30, color: "#4B78FF", image: "archive(2)/1.webp", context: "커미션 | A5 | 목차 및 장표지 (A)" },
@@ -123,43 +120,112 @@
     return Math.round(outMin + ratio * (outMax - outMin));
   }
 
-  function renderBooks(books) {
-    shelfTrack.innerHTML = '';
-    books.forEach((book, i) => {
-      const el = document.createElement('button');
-      el.type = 'button';
-      el.className = `book ${colorClass(book.color)}`;
-      el.style.width = spineWidth(book.spine) + 'px';
-      el.style.background = book.color || '#222222';
-      el.setAttribute('aria-label', `${book.title} - ${book.author}`);
+  function createBookEl(book, i) {
+    const el = document.createElement('button');
+    el.type = 'button';
+    el.className = `book ${colorClass(book.color)}`;
+    el.style.width = spineWidth(book.spine) + 'px';
+    el.style.background = book.color || '#222222';
+    el.setAttribute('aria-label', `${book.title} - ${book.author}`);
 
-      el.innerHTML = `
-        <span class="book-text">
-          <span class="book-title">${truncateTitle(book.title || '')}</span>
-          <span class="book-author">${book.author || ''}</span>
-        </span>`;
+    el.innerHTML = `
+      <span class="book-text">
+        <span class="book-title">${truncateTitle(book.title || '')}</span>
+        <span class="book-author">${book.author || ''}</span>
+      </span>`;
 
-      if (isHoverCapable) {
-        // PC: 책등에 마우스를 올리기만 해도 팝업이 뜨고, 벗어나면 닫힘
-        // interactive=false 로 열어서 모달이 마우스 이벤트를 가로채지 않게 함
-        // (그래야 모달이 책등 위를 덮어도 mouseleave가 잘못 발생해 깜빡이지 않음)
-        el.addEventListener('mouseenter', () => {
-          if (isShelfDragging) return;
-          openBookModal(book, i, false);
-        });
-        el.addEventListener('mouseleave', () => {
-          closeModal();
-        });
-        // 클릭하면 닫기 버튼/배경 클릭이 되는 일반 모달로 "고정"
-        el.addEventListener('click', () => openBookModal(book, i, true));
+    if (isHoverCapable) {
+      // PC: 책등에 마우스를 올리기만 해도 팝업이 뜨고, 벗어나면 닫힘
+      // interactive=false 로 열어서 모달이 마우스 이벤트를 가로채지 않게 함
+      // (그래야 모달이 책등 위를 덮어도 mouseleave가 잘못 발생해 깜빡이지 않음)
+      el.addEventListener('mouseenter', () => openBookModal(book, i, false));
+      el.addEventListener('mouseleave', () => closeModal());
+      // 클릭하면 닫기 버튼/배경 클릭이 되는 일반 모달로 "고정"
+      el.addEventListener('click', () => openBookModal(book, i, true));
+    } else {
+      // 모바일/터치: 탭(클릭)으로만 열림, 항상 상호작용 가능한 일반 모달
+      el.addEventListener('click', () => openBookModal(book, i, true));
+    }
+
+    return el;
+  }
+
+  function createShelfRow() {
+    const row = document.createElement('div');
+    row.className = 'shelf-row';
+
+    const track = document.createElement('div');
+    track.className = 'shelf-track';
+    track.setAttribute('aria-label', '책장');
+
+    const board = document.createElement('div');
+    board.className = 'shelf-board';
+    board.setAttribute('aria-hidden', 'true');
+
+    row.appendChild(track);
+    row.appendChild(board);
+    return { row, track, board };
+  }
+
+  /* --------------------------------------------------------------------
+     책의 개수에 따라 책장을 여러 줄로 자동 분할 (좌우 스크롤 없이,
+     한 줄이 넘치면 그 아래에 새 책장을 하나 더 생성)
+     -------------------------------------------------------------------- */
+  const shelfWrapEl = shelfTrack.closest('.shelf-wrap');
+
+  // 원래 HTML에 있던 shelfTrack / shelf-board 한 쌍을 "행(row)" 구조로 감싸기
+  (function wrapFirstRow() {
+    const firstBoard = shelfWrapEl.querySelector('.shelf-board');
+    const firstRow = document.createElement('div');
+    firstRow.className = 'shelf-row';
+    shelfWrapEl.insertBefore(firstRow, shelfTrack);
+    firstRow.appendChild(shelfTrack);
+    if (firstBoard) firstRow.appendChild(firstBoard);
+  })();
+
+  function layoutShelves() {
+    const rows = shelfWrapEl.querySelectorAll('.shelf-row');
+    // 첫 번째 행은 재사용(비우기), 나머지는 제거하고 다시 생성
+    rows.forEach((row, idx) => {
+      if (idx === 0) {
+        row.querySelector('.shelf-track').innerHTML = '';
       } else {
-        // 모바일/터치: 탭(클릭)으로만 열림, 항상 상호작용 가능한 일반 모달
-        el.addEventListener('click', () => openBookModal(book, i, true));
+        row.remove();
+      }
+    });
+
+    const firstTrack = shelfWrapEl.querySelector('.shelf-track');
+    const trackStyles = getComputedStyle(firstTrack);
+    const paddingX = parseFloat(trackStyles.paddingLeft) + parseFloat(trackStyles.paddingRight);
+    const availableWidth = Math.max(0, firstTrack.clientWidth - paddingX);
+
+    let currentTrack = firstTrack;
+    let currentWidth = 0;
+
+    BOOKS_DATA.forEach((book, i) => {
+      const w = spineWidth(book.spine);
+
+      // 책을 추가했을 때 넘친다고 판단되면(오버플로우) 책장을 아래에 하나 더 생성
+      if (currentWidth > 0 && currentWidth + w > availableWidth) {
+        const { row, track } = createShelfRow();
+        shelfWrapEl.appendChild(row);
+        currentTrack = track;
+        currentWidth = 0;
       }
 
-      shelfTrack.appendChild(el);
+      currentTrack.appendChild(createBookEl(book, i));
+      currentWidth += w;
     });
   }
+
+  layoutShelves();
+
+  // 화면 크기가 바뀌면(반응형 구간 전환 등) 책장을 다시 계산
+  let resizeTimer = null;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(layoutShelves, 150);
+  });
 
   function openBookModal(book, i, interactive = true) {
     const img = book.image && book.image.trim()
@@ -187,52 +253,5 @@
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeModal();
   });
-
-  renderBooks(BOOKS_DATA);
-
-  // 책장 드래그 스크롤 (마우스)
-  (function enableDragScroll(track) {
-    let isDown = false;
-    let startX = 0;
-    let scrollStart = 0;
-    let moved = false;
-
-    track.addEventListener('mousedown', (e) => {
-      isDown = true;
-      moved = false;
-      track.classList.add('dragging');
-      startX = e.pageX;
-      scrollStart = track.scrollLeft;
-    });
-
-    window.addEventListener('mousemove', (e) => {
-      if (!isDown) return;
-      const dx = e.pageX - startX;
-      if (Math.abs(dx) > 5) {
-        moved = true;
-        isShelfDragging = true;
-        closeModal();
-      }
-      track.scrollLeft = scrollStart - dx;
-    });
-
-    window.addEventListener('mouseup', () => {
-      isDown = false;
-      isShelfDragging = false;
-      track.classList.remove('dragging');
-    });
-
-    // 드래그 후 클릭 이벤트로 모달이 잘못 열리는 것 방지
-    track.addEventListener(
-      'click',
-      (e) => {
-        if (moved) {
-          e.stopPropagation();
-          e.preventDefault();
-        }
-      },
-      true
-    );
-  })(shelfTrack);
 
 })();
