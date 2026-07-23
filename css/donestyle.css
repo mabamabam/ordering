@@ -112,6 +112,27 @@ header {
   --radius: 4px;
 }
 
+.blue {
+    color: #4B78FF;
+    text-align: right;
+    display: block;
+}
+
+.dark {
+    color: #222222;
+    text-align: right;
+    display: block;
+}
+
+.detail {
+    margin-top: 30px;
+}
+
+.detail_container {
+    display: flex;
+    justify-content: space-between;
+}
+
 
 h1 {
     font-size: 45px;
@@ -156,12 +177,6 @@ p {
     font-size: 18px;
     font-weight: 400;
     line-height: 28px;
-}
-
-.hint {
-  text-align: center;
-  color: #66666661;
-  margin-top: 50px;
 }
 
 span {
@@ -216,46 +231,36 @@ button {
 }
 
 
+
+
+
+
 /* 책장 */
 #shelf {
   margin-top: 100px;
 }
 
 .shelf-wrap {
-  position: relative;
-  padding-bottom: 22px;
   max-width: 1200px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.shelf-row {
+  position: relative;
+  padding-bottom: 22px;
 }
 
 .shelf-track {
   display: flex;
   align-items: flex-end;
+  justify-content: flex-start;
   gap: 0;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding: 35px 8px 0px;
-  cursor: grab;
-  scrollbar-width: thin;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
+  overflow: hidden;
+  padding: 40px 8px 0px;
   user-select: none;
-}
-
-.shelf-track.dragging {
-  cursor: grabbing;
-  scroll-behavior: auto;
-}
-
-.shelf-track::-webkit-scrollbar {
-  display: none;
-}
-.shelf-track::-webkit-scrollbar-thumb {
-  background: #ddd;
-  border-radius: 4px;
-}
-.shelf-track::-webkit-scrollbar-track {
-  background: transparent;
 }
 
 .shelf-board {
@@ -567,7 +572,7 @@ button {
 
     .checkgrid {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(1, 1fr);
         margin-top: 60px;
     }
 
@@ -813,6 +818,9 @@ button {
         max-width: 66%;
         overflow: auto;
         padding: 33px;
-  }
-}
+    }
 
+    .checkgrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
