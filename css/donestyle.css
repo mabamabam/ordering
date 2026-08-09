@@ -1,0 +1,826 @@
+* {padding: 0; margin: 0; letter-spacing: -6%; box-sizing: border-box;}
+a {text-decoration: none; color: #222;}
+html, body {margin: 0; padding: 0;}
+img {max-width: 100%; display: block;}
+
+
+/* 스크롤 숨기기 */
+html::-webkit-scrollbar {
+    display: none;
+}
+
+/* Firefox */
+html {
+  scrollbar-width: none;
+}
+
+/* IE */
+html{
+  -ms-overflow-style: none;
+}
+
+
+/* 마우스 */
+.cursor-glow{
+    position: fixed;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+
+    background:#4B78FF;;
+    pointer-events: none;
+    mix-blend-mode:color-burn;
+
+    z-index: 10001;
+
+    left: 0;
+    top: 0;
+
+    transform: translate(-50%, -50%);
+    transition: transform 0.08s linear;
+}
+
+
+/* 배경 */
+.bg{
+    position:fixed;
+    inset:0;
+    background:url(../img/yellowmabam.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    will-change: transform;
+    mix-blend-mode: multiply;
+    z-index: -1;
+    transition: 1s ease;
+}
+
+
+/* 헤더 */
+#mobileheader {
+    display: none;
+}
+
+header>a {
+    font-weight: 800;
+    font-size: 20px;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    padding: 0 45px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    letter-spacing: -5%;
+    z-index: 9999;
+}
+
+#header {
+    width: 45%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#header>a {
+    display: block;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+#header>a:hover {
+    transition: all 0.2s ease;
+    color: #4B78FF;
+}
+
+
+/* 컬러토큰 및 헤더 */
+:root {
+  --c-lime: #ddff4d;
+  --c-blue: #4B78FF;
+  --c-dark: #222222;
+  --c-white: #fefefe;
+
+  --header-h: 64px;
+  --gap-section: 96px;
+  --radius: 4px;
+}
+
+.blue {
+    color: #4B78FF;
+    text-align: right;
+    display: block;
+}
+
+.dark {
+    color: #222222;
+    text-align: right;
+    display: block;
+}
+
+.detail {
+    margin-top: 30px;
+}
+
+.detail_container {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+h1 {
+    font-size: 45px;
+    position: relative;
+    line-height: 50px;
+}
+
+h2 {
+    font-size: 22px;
+    width: fit-content;
+}
+
+.type2 {
+    font-weight: 500;
+}
+
+h3 {
+    margin-top: 5px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+h4 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+h5 {
+    font-size: 22px;
+    line-height: 32px;
+}
+
+
+h6 {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 28px;
+    margin-top: 10px;
+}
+
+p {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 28px;
+}
+
+span {
+  font-size: 14.5px;
+  font-weight: 400;
+  margin-left: -1px;
+}
+
+
+.book-title {
+  font-weight: 500;
+}
+
+
+
+/* slide */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+.section-inner {
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 0 100px;
+}
+
+.section {
+  padding: var(--gap-section) 0;
+}
+
+.section-title {
+  display: block;
+  line-height: 80px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.section-desc {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.checkgrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 60px;
+}
+
+
+
+
+
+
+/* 책장 */
+#shelf {
+  margin-top: 100px;
+}
+
+.shelf-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.shelf-row {
+  position: relative;
+  padding-bottom: 22px;
+}
+
+.shelf-track {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 0;
+  overflow: hidden;
+  padding: 40px 8px 0px;
+  user-select: none;
+}
+
+.shelf-board {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 14px;
+  background: var(--c-dark);
+  border-radius: 0 0 4px 4px;
+}
+
+.book {
+  position: relative;
+  flex: 0 0 auto;
+  height: 220px;
+  --spine-h: 220px;
+  border-radius: 2px 2px 0 0;
+  box-shadow: inset -4px 0 6px rgba(0, 0, 0, 0.03), 2px 0 4px rgba(0, 0, 0, 0.03);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease;
+}
+
+.book:hover {
+  transform: translateY(-8px);
+}
+
+.book:focus-visible {
+  outline: 2px solid var(--c-blue);
+  outline-offset: 2px;
+}
+
+.book-text {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: calc(var(--spine-h) - 28px);
+  white-space: nowrap;
+  transform: rotate(90deg);
+  transform-origin: center;
+  pointer-events: none;
+}
+
+.book-author {
+  font-size: 0.72rem;
+  opacity: 0.85;
+}
+
+.book--dark .book-title,
+.book--dark .book-author
+{
+  color: var(--c-white);
+}
+
+.book--lime .book-title,
+.book--lime .book-author
+.book--blue .book-author
+.book--blue .book-title
+{
+  color: var(--c-dark);
+}
+
+
+
+/* 모달 */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.modal.is-open {
+  display: flex;
+}
+
+/* 호버로 미리보기만 할 때는 모달이 마우스 이벤트를 가로채지 않게 함
+   (그래야 모달이 책등 위에 나타나도 mouseleave가 잘못 발생해 깜빡이지 않음) */
+.modal.modal--preview {
+  pointer-events: none;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(34,34,34,0.72);
+}
+
+.modal-panel {
+  position: relative;
+  background: var(--c-white);
+  border-radius: 8px;
+  max-width: min(900px, 92vw);
+  max-height: 90vh;
+  overflow: auto;
+  padding: 30px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--c-dark);
+  text-shadow: -2px 0 #fff, 0 2px #fff, 2px 0 #fff, 0 -2px #fff;
+}
+
+.modal-image-wrap {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: #f1f1f1;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.modal-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.modal-info {
+  padding-top: 16px;
+}
+
+.modal-info h3 {
+  margin-bottom: 0.2em;
+}
+
+.modal-info p {
+  color: #666;
+  margin: 0;
+}
+
+
+
+
+
+/* 모바일 반응형 */
+@media (max-width: 500px) {
+    .cursor-glow {
+        display: none;
+    }
+
+    #mobileheader {
+        width: 50%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    #header {
+        display: none;
+    }
+
+    header>a {
+        font-weight: 800;
+        font-size: 15px;
+    }
+
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        padding: 0 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        letter-spacing: -5%;
+        z-index: 9999;
+    }
+
+    #header>a {
+        display: block;
+        font-weight: 700;
+        font-size: 15px;
+    }
+
+    #header>a:hover {
+        transition: all 0.2s ease;
+        color: #4B78FF;
+    }
+
+    h1 {
+        font-size: 20px;
+        position: relative;
+        line-height: 40px;
+    }
+
+    h2 {
+        font-size: 18px;
+        width: fit-content;
+    }
+
+    .hoverevent>h2 {
+        font-size: 16px;
+        width: fit-content;
+    }
+
+    .hoverevent>h2:hover {
+        display: block;
+    }
+
+    .type2 {
+        font-weight: 500;
+    }
+
+    h3 {
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    h4 {
+        font-size: 24px;
+        margin-bottom: 5px;
+    }
+
+    h5 {
+        font-size: 22px;
+        line-height: 32px;
+    }
+
+
+    h6 {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 25px;
+        margin-top: 10px;
+    }
+
+    p {
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 28px;
+    }
+
+    .align {
+        padding: 0 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .lighter {
+        padding: 0 10px;
+        font-size: 21px;
+        font-weight: 400;
+        color: #22222280;
+    }
+
+
+    .menu {
+        padding: 0 35px;
+        margin-bottom: 70px;
+    }
+
+    .option {
+        padding: 25px 25px;
+    }
+
+    .hoverevent>p {
+        display: none;
+    }
+
+    .colorbox {
+        padding: 35px 25px;
+    }
+
+    .textbox {
+        margin-left: -20px;
+        line-height: 26px;
+        display: block;
+        height: auto;
+    }
+
+    .option>h1, .afteryou {
+        margin: 18px 0;
+    }
+
+    .ordering {
+        height: auto;
+        display: flex;
+        justify-content: left;
+        margin-bottom: 100px;
+    }
+
+    .inboxtext {
+        font-size: 30px;
+        font-weight: 700;
+        z-index: 99;
+    }
+
+    .section-inner {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    .checkgrid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        margin-top: 60px;
+    }
+
+    .shelf-section {
+        max-width: 90%;
+        margin: 0 auto;
+    }
+
+    .modal-panel {
+        padding: 17px;
+    }
+
+    .book { height: 160px; --spine-h: 160px; }
+    .book-title { font-size: 0.78rem; }
+    .book-author { font-size: 0.64rem; }
+}
+
+
+/* 태블릿 반응형 */
+@media (min-width: 501px) and (max-width: 1000px) {
+    .cursor-glow {
+        display: none;
+    }
+    
+    header>a {
+        font-weight: 800;
+        font-size: 15px;
+    }
+
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        padding: 0 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        letter-spacing: -5%;
+        z-index: 9999;
+    }
+
+    #header {
+        width: 70%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    #header>a {
+        display: block;
+        font-weight: 700;
+        font-size: 15px;
+    }
+
+    #header>a:hover {
+        transition: all 0.2s ease;
+        color: #4B78FF;
+    }
+
+    h1 {
+        font-size: 24px;
+        position: relative;
+        line-height: 50px;
+    }
+
+    h2 {
+        font-size: 18px;
+        width: fit-content;
+    }
+
+    .type2 {
+        font-weight: 500;
+    }
+
+    h3 {
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    h4 {
+        font-size: 24px;
+        margin-bottom: 5px;
+    }
+
+    h5 {
+        font-size: 22px;
+        line-height: 32px;
+    }
+
+
+    h6 {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 25px;
+        margin-top: 10px;
+    }
+
+    p {
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 28px;
+    }
+
+    .section-inner {
+      max-width: 70vw;
+      max-width: 80%;
+      margin: 0 auto;
+      padding: 0 0;
+    }
+
+    .modal-panel {
+        max-height: 90%;
+        overflow: auto;
+        padding: 20px;
+    }
+
+    .section-title {
+        line-height: 60px;
+    }
+
+    .checkgrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+@media (min-width: 1001px) and (max-width: 1200px) {
+    .cursor-glow {
+        display: none;
+    }
+    
+    header>a {
+        font-weight: 800;
+        font-size: 20px;
+    }
+
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 80px;
+        padding: 0 45px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        letter-spacing: -5%;
+        z-index: 9999;
+    }
+
+    #header {
+        width: 45%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    #header>a {
+        display: block;
+        font-weight: 700;
+        font-size: 20px;
+    }
+
+    #header>a:hover {
+        transition: all 0.2s ease;
+        color: #4B78FF;
+    }
+
+    h1 {
+        font-size: 45px;
+        position: relative;
+        line-height: 50px;
+    }
+
+    h2 {
+        font-size: 22px;
+        width: fit-content;
+    }
+
+    .type2 {
+        font-weight: 500;
+    }
+
+    h3 {
+        margin-top: 5px;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    h4 {
+        font-size: 24px;
+        margin-bottom: 5px;
+    }
+
+    h5 {
+        font-size: 22px;
+        line-height: 32px;
+    }
+
+
+    h6 {
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 28px;
+        margin-top: 10px;
+    }
+
+    p {
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 28px;
+    }
+
+    .hint {
+        text-align: center;
+        color: #66666661;
+        margin-top: 50px;
+    }
+
+    span {
+        font-size: 14.5px;
+        font-weight: 400;
+        margin-left: -1px;
+    }
+
+
+    .book-title {
+        font-weight: 500;
+    }
+
+    .section-inner {
+        max-width: 70vw;
+        max-width: 80%;
+        margin: 0 auto;
+        padding: 0 0;
+    }
+
+    .modal-panel {
+        max-width: 66%;
+        overflow: auto;
+        padding: 33px;
+    }
+
+    .checkgrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
