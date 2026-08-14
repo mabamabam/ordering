@@ -103,7 +103,6 @@ document.addEventListener("DOMContentLoaded", function(){
             {unsold: "images/red/25.jpg"},
             {unsold: "images/yell/43.jpg"},
             {unsold: "images/yell/119.jpg"},
-            {unsold: "images/yell/130.webp"},
             {unsold: "images/yell/16.jpg"},
             {unsold: "images/white/126.jpg"},
             {unsold: "images/white/4.jpg"},
