@@ -57,6 +57,7 @@
     // { title: "새벽이 드는 창가에", author: "IZE", spine: 20, color: "#222222", image: "archive(2)/1.webp", context: "커미션 | A5" },
     // { title: "검푸른 장막 너머로", author: "IZE", spine: 20, color: "#222222", image: "archive(2)/1.webp", context: "커미션 | A5" },
     // { title: "소드마스터는 대화로 해결하지 않는다", author: "앤솔로지", spine: 30, color: "#4B78FF", image: "archive(2)/46.webp", context: "레디메이드 | 목차 및 장표지 (B)" },
+    { title: "사계", author: "실행 외 3인", spine: 20, color: "#ddff4d", image: "archive(2)/47.webp", context: "레디메이드 | A5" },
     { title: "Perfect way to kill the boss", author: "이바나", spine: 20, color: "#ddff4d", image: "archive(2)/46.webp", context: "레디메이드 | 웹소설 표지" },
     { title: "상사를죽이는완벽한방법", author: "이바나", spine: 20, color: "#ddff4d", image: "archive(2)/45.webp", context: "레디메이드 | 웹소설 표지" },
     { title: "우리는 여전히", author: "게스트북", spine: 30, color: "#ddff4d", image: "archive(2)/42.webp", context: "레디메이드 | A5" },
