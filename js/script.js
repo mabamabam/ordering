@@ -53,10 +53,12 @@
 
   // 책장 데이터 (원래 data/books.json 이었던 내용을 그대로 옮겨온 것)
   const BOOKS_DATA = [
-    // { title: "망사랑이 딱 좋아!", author: "앤솔로지", spine: 30, color: "#222222", image: "archive(2)/1.webp", context: "커미션 | A5 | 목차 및 장표지 (B)" },
     // { title: "새벽이 드는 창가에", author: "IZE", spine: 20, color: "#222222", image: "archive(2)/1.webp", context: "커미션 | A5" },
     // { title: "검푸른 장막 너머로", author: "IZE", spine: 20, color: "#222222", image: "archive(2)/1.webp", context: "커미션 | A5" },
-    // { title: "소드마스터는 대화로 해결하지 않는다", author: "앤솔로지", spine: 30, color: "#4B78FF", image: "archive(2)/46.webp", context: "레디메이드 | 목차 및 장표지 (B)" },
+    // { title: "Cognitive Error", author: "403", spine: 30, color: "#ddff4d", image: "archive(2)/48.webp", context: "레디메이드 | A5" },
+    // { title: "망사랑이 딱 좋아!", author: "앤솔로지", spine: 30, color: "#222222", image: "archive(2)/1.webp", context: "커미션 | A5 | 목차 및 장표지 (B) | 문진 굿즈" },
+    // { title: "파편의 향기", author: "늠", spine: 20, color: "#ddff4d", image: "archive(2)/48.webp", context: "레디메이드 | B6" },
+    { title: "소드마스터는 대화로 해결하지 않는다", author: "앤솔로지", spine: 30, color: "#4B78FF", image: "archive(2)/48.webp", context: "레디메이드 | A5 | 목차 및 장표지 (B)" },
     { title: "사계", author: "실행 외 3인", spine: 20, color: "#ddff4d", image: "archive(2)/47.webp", context: "레디메이드 | A5" },
     { title: "Perfect way to kill the boss", author: "이바나", spine: 20, color: "#ddff4d", image: "archive(2)/46.webp", context: "레디메이드 | 웹소설 표지" },
     { title: "상사를죽이는완벽한방법", author: "이바나", spine: 20, color: "#ddff4d", image: "archive(2)/45.webp", context: "레디메이드 | 웹소설 표지" },
@@ -98,13 +100,40 @@
     { title: "Deferred Alpha", author: "양피지", spine: 20, color: "#ddff4d", image: "archive(2)/37.webp", context: "레디메이드 | 웹소설 표지" },
     { title: "단편선", author: "튜즈", spine: 20, color: "#ddff4d", image: "archive(2)/11.webp", context: "레디메이드 | A5" },
     { title: "락앤롤베이비", author: "우물안두꺼비", spine: 27, color: "#4B78FF", image: "archive(2)/16.webp", context: "레디메이드 | 비판형 | 목차 및 장표지 (B)" },
-    { title: "어떤 감정의 비가역성에 대하여", author: "한여름밤의 괴담", spine: 22, color: "#222222", image: "archive(2)/10.webp", context: "레디메이드 | A5 | 목차 및 장표지 (A)" },
+    { title: "어떤 감정의 비가역성에 대하여", author: "한여름밤의 괴담", spine: 22, color: "#ddff4d", image: "archive(2)/10.webp", context: "레디메이드 | A5 | 목차 및 장표지 (A)" },
     { title: "Wildest Dreams", author: "나리", spine: 25, color: "#ddff4d", image: "archive(2)/15.webp", context: "레디메이드 | A5" },
     { title: "99%토마토주스공급사건", author: "소람", spine: 21, color: "#4B78FF", image: "archive(2)/14.webp", context: "레디메이드 | A5 | 약표제지" },
     { title: "Lucky Strike", author: "유카", spine: 21, color: "#4B78FF", image: "archive(2)/13.webp", context: "레디메이드 | A5 | 장표지 (A)" },
     { title: "Find our way to Love Ending", author: "Kim10000tang", spine: 21, color: "#ddff4d", image: "archive(2)/9.webp", context: "레디메이드 | A5" },
     { title: "수란은 어렵다", author: "@", spine: 20, color: "#ddff4d", image: "archive(2)/36.webp", context: "레디메이드 | 웹소설 표지" },
   ];
+
+  /* --------------------------------------------------------------------
+     1. 이미지 프리로드 — 책 사진들을 미리 전부 받아둬서
+        호버 시 로딩 공백(엑박)이 생기지 않도록 함.
+        다운로드가 끝나기 전에는 호버해도 팝업이 뜨지 않고,
+        끝난 뒤에는 캐시된 이미지라 즉시(딜레이 없이) 표시됨.
+     -------------------------------------------------------------------- */
+  let imagesReady = false;
+
+  function preloadBookImages(list) {
+    const uniqueSrcs = [...new Set(
+      list.map(b => (b.image && b.image.trim()) ? b.image.trim() : null).filter(Boolean)
+    )];
+
+    const loaders = uniqueSrcs.map(src => new Promise((resolve) => {
+      const img = new Image();
+      img.onload = resolve;
+      img.onerror = resolve; // 개별 이미지가 실패해도 전체 진행을 막지 않음
+      img.src = src;
+    }));
+
+    return Promise.all(loaders);
+  }
+
+  preloadBookImages(BOOKS_DATA).then(() => {
+    imagesReady = true;
+  });
 
   function truncateTitle(title) {
     return title.length > 9 ? title.slice(0, 9) + '…' : title;
@@ -142,13 +171,23 @@
       // PC: 책등에 마우스를 올리기만 해도 팝업이 뜨고, 벗어나면 닫힘
       // interactive=false 로 열어서 모달이 마우스 이벤트를 가로채지 않게 함
       // (그래야 모달이 책등 위를 덮어도 mouseleave가 잘못 발생해 깜빡이지 않음)
-      el.addEventListener('mouseenter', () => openBookModal(book, i, false));
+      // 이미지가 아직 프리로드되지 않았으면 호버해도 아무 반응 없음(엑박 방지)
+      el.addEventListener('mouseenter', () => {
+        if (!imagesReady) return;
+        openBookModal(book, i, false);
+      });
       el.addEventListener('mouseleave', () => closeModal());
       // 클릭하면 닫기 버튼/배경 클릭이 되는 일반 모달로 "고정"
-      el.addEventListener('click', () => openBookModal(book, i, true));
+      el.addEventListener('click', () => {
+        if (!imagesReady) return;
+        openBookModal(book, i, true);
+      });
     } else {
       // 모바일/터치: 탭(클릭)으로만 열림, 항상 상호작용 가능한 일반 모달
-      el.addEventListener('click', () => openBookModal(book, i, true));
+      el.addEventListener('click', () => {
+        if (!imagesReady) return;
+        openBookModal(book, i, true);
+      });
     }
 
     return el;
