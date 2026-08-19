@@ -58,6 +58,7 @@
     // { title: "Cognitive Error", author: "403", spine: 30, color: "#ddff4d", image: "archive(2)/48.webp", context: "레디메이드 | A5" },
     // { title: "망사랑이 딱 좋아!", author: "앤솔로지", spine: 30, color: "#222222", image: "archive(2)/1.webp", context: "커미션 | A5 | 목차 및 장표지 (B) | 문진 굿즈" },
     { title: "파편의 향기", author: "늠", spine: 20, color: "#ddff4d", image: "archive(2)/50.webp", context: "레디메이드 | B6" },
+    { title: "구조의 재구성", author: "낙오", spine: 20, color: "#222222", image: "archive(2)/49.webp", context: "레디메이드 | A5 | 오브젝트 변경" },
     { title: "소드마스터는 대화로 해결하지 않는다", author: "앤솔로지", spine: 30, color: "#4B78FF", image: "archive(2)/48.webp", context: "레디메이드 | A5 | 목차 및 장표지 (B)" },
     { title: "사계", author: "실행 외 3인", spine: 20, color: "#ddff4d", image: "archive(2)/47.webp", context: "레디메이드 | A5" },
     { title: "Perfect way to kill the boss", author: "이바나", spine: 20, color: "#ddff4d", image: "archive(2)/46.webp", context: "레디메이드 | 웹소설 표지" },
