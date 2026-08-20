@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function(){
             {unsold: "images/black/58.jpg"},
             {unsold: "images/black/97.jpg"},
             {unsold: "images/black/138.webp"},
+            {unsold: "images/black/29.webp"},
             {unsold: "images/black/87.jpg"},
             {unsold: "images/blue/61.jpg"},
             {unsold: "images/black/67.jpg"},
