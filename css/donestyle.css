@@ -344,12 +344,6 @@ button {
   display: flex;
 }
 
-/* 호버로 미리보기만 할 때는 모달이 마우스 이벤트를 가로채지 않게 함
-   (그래야 모달이 책등 위에 나타나도 mouseleave가 잘못 발생해 깜빡이지 않음) */
-.modal.modal--preview {
-  pointer-events: none;
-}
-
 .modal-backdrop {
   position: absolute;
   inset: 0;
@@ -360,10 +354,14 @@ button {
   position: relative;
   background: var(--c-white);
   border-radius: 8px;
-  max-width: min(900px, 92vw);
-  max-height: 90vh;
-  overflow: auto;
-  padding: 30px;
+  /* 폭은 92vw/820px를 넘지 않으면서, 이미지(4:3) + 텍스트 영역을 더한
+     전체 높이가 뷰포트 높이의 92%를 넘지 않도록 세 번째 값으로 제한 */
+  width: min(92vw, 820px, calc((92vh - 160px) * 4 / 3));
+  max-height: 92vh;
+  overflow: hidden;
+  padding: clamp(16px, 3vw, 30px);
+  display: flex;
+  flex-direction: column;
 }
 
 .modal-close {
@@ -378,7 +376,8 @@ button {
 
 .modal-image-wrap {
   width: 100%;
-  aspect-ratio: 4/3;
+  aspect-ratio: 4 / 3;
+  flex: 0 0 auto;
   background: #f1f1f1;
   border-radius: 4px;
   overflow: hidden;
@@ -388,19 +387,36 @@ button {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  object-position: center;
 }
 
 .modal-info {
-  padding-top: 16px;
+  flex: 0 0 auto;
+  padding-top: clamp(10px, 2vw, 16px);
 }
 
-.modal-info h3 {
-  margin-bottom: 0.2em;
+.modal-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.modal-heading h3 {
+  margin: 0;
+  font-size: clamp(16px, 2.4vw, 20px);
+}
+
+.modal-author {
+  font-size: clamp(12px, 1.6vw, 14.5px);
+  color: #888;
 }
 
 .modal-info p {
   color: #666;
-  margin: 0;
+  margin: 4px 0 0;
+  font-size: clamp(13px, 1.8vw, 16px);
+  line-height: 1.5;
 }
 
 
@@ -581,10 +597,6 @@ button {
         margin: 0 auto;
     }
 
-    .modal-panel {
-        padding: 17px;
-    }
-
     .book { height: 160px; --spine-h: 160px; }
     .book-title { font-size: 0.78rem; }
     .book-author { font-size: 0.64rem; }
@@ -684,12 +696,6 @@ button {
       max-width: 80%;
       margin: 0 auto;
       padding: 0 0;
-    }
-
-    .modal-panel {
-        max-height: 90%;
-        overflow: auto;
-        padding: 20px;
     }
 
     .section-title {
@@ -812,12 +818,6 @@ button {
         max-width: 80%;
         margin: 0 auto;
         padding: 0 0;
-    }
-
-    .modal-panel {
-        max-width: 66%;
-        overflow: auto;
-        padding: 33px;
     }
 
     .checkgrid {
