@@ -48,8 +48,8 @@
   const modalAuthor = document.getElementById('modalAuthor');
   const modalContext = document.getElementById('modalContext');
 
-  // 마우스가 있는 PC 환경인지 판별 (true면 호버로 오픈, false면 모바일처럼 탭/클릭으로 오픈)
-  const isHoverCapable = window.matchMedia('(min-width: 1200px)').matches;
+  // 현재 팝업에 열려 있는 책의 인덱스 (키보드 좌우 이동에 사용)
+  let currentIndex = null;
 
   // 책장 데이터 (원래 data/books.json 이었던 내용을 그대로 옮겨온 것)
   const BOOKS_DATA = [
@@ -57,6 +57,7 @@
     // { title: "검푸른 장막 너머로", author: "IZE", spine: 20, color: "#222222", image: "archive(2)/1.webp", context: "커미션 | A5" },
     // { title: "Cognitive Error", author: "403", spine: 30, color: "#ddff4d", image: "archive(2)/48.webp", context: "레디메이드 | A5" },
     // { title: "망사랑이 딱 좋아!", author: "앤솔로지", spine: 30, color: "#222222", image: "archive(2)/1.webp", context: "커미션 | A5 | 목차 및 장표지 (B) | 문진 굿즈" },
+    { title: "The Last Variable", author: "사과", spine: 23, color: "#ddff4d", image: "archive(2)/51.webp", context: "레디메이드 | A5" },
     { title: "파편의 향기", author: "늠", spine: 20, color: "#ddff4d", image: "archive(2)/50.webp", context: "레디메이드 | B6" },
     { title: "구조의 재구성", author: "낙오", spine: 20, color: "#222222", image: "archive(2)/49.webp", context: "레디메이드 | A5 | 오브젝트 변경" },
     { title: "소드마스터는 대화로 해결하지 않는다", author: "앤솔로지", spine: 30, color: "#4B78FF", image: "archive(2)/48.webp", context: "레디메이드 | A5 | 목차 및 장표지 (B)" },
@@ -168,28 +169,11 @@
         <span class="book-author">${book.author || ''}</span>
       </span>`;
 
-    if (isHoverCapable) {
-      // PC: 책등에 마우스를 올리기만 해도 팝업이 뜨고, 벗어나면 닫힘
-      // interactive=false 로 열어서 모달이 마우스 이벤트를 가로채지 않게 함
-      // (그래야 모달이 책등 위를 덮어도 mouseleave가 잘못 발생해 깜빡이지 않음)
-      // 이미지가 아직 프리로드되지 않았으면 호버해도 아무 반응 없음(엑박 방지)
-      el.addEventListener('mouseenter', () => {
-        if (!imagesReady) return;
-        openBookModal(book, i, false);
-      });
-      el.addEventListener('mouseleave', () => closeModal());
-      // 클릭하면 닫기 버튼/배경 클릭이 되는 일반 모달로 "고정"
-      el.addEventListener('click', () => {
-        if (!imagesReady) return;
-        openBookModal(book, i, true);
-      });
-    } else {
-      // 모바일/터치: 탭(클릭)으로만 열림, 항상 상호작용 가능한 일반 모달
-      el.addEventListener('click', () => {
-        if (!imagesReady) return;
-        openBookModal(book, i, true);
-      });
-    }
+    // PC/태블릿/모바일 모든 환경에서 클릭(탭)으로만 팝업이 열림
+    el.addEventListener('click', () => {
+      if (!imagesReady) return;
+      openBookModal(book, i);
+    });
 
     return el;
   }
@@ -271,31 +255,51 @@
     resizeTimer = setTimeout(layoutShelves, 150);
   });
 
-  function openBookModal(book, i, interactive = true) {
+  function openBookModal(book, i) {
     const img = book.image && book.image.trim()
       ? book.image
       : placeholderDataUri(2000, 1500, book.title || `작업물 ${i + 1}`, '#f1f1f1', '#999999');
 
+    currentIndex = i;
     modalImage.src = img;
     modalImage.alt = book.title || '';
     modalTitle.textContent = book.title || '';
+    modalAuthor.textContent = book.author || '';
     modalContext.textContent = book.context || '';
     modal.classList.add('is-open');
-    modal.classList.toggle('modal--preview', !interactive);
     modal.setAttribute('aria-hidden', 'false');
   }
 
   function closeModal() {
-    modal.classList.remove('is-open', 'modal--preview');
+    modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden', 'true');
     modalImage.src = '';
+    currentIndex = null;
+  }
+
+  // 팝업이 열려 있는 동안 좌우 화살표로 이전/다음 책으로 자유롭게 이동
+  // (마지막 책에서 오른쪽으로 가면 처음으로, 첫 책에서 왼쪽으로 가면 마지막으로 순환)
+  function showRelativeBook(step) {
+    if (currentIndex === null || !imagesReady) return;
+    const len = BOOKS_DATA.length;
+    const nextIndex = (currentIndex + step + len) % len;
+    openBookModal(BOOKS_DATA[nextIndex], nextIndex);
   }
 
   modal.querySelectorAll('[data-close]').forEach(el => {
     el.addEventListener('click', closeModal);
   });
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModal();
+    if (!modal.classList.contains('is-open')) return;
+    if (e.key === 'Escape') {
+      closeModal();
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      showRelativeBook(1);
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      showRelativeBook(-1);
+    }
   });
 
 })();
