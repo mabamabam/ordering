@@ -71,7 +71,7 @@
     { title: "Touch ①", author: "하얀꿈", spine: 30, color: "#222222", image: "archive(2)/35.webp", context: "커미션 | A5 | 책날개 | 시리즈 작업" },
     { title: "Touch ②", author: "하얀꿈", spine: 30, color: "#222222", image: "archive(2)/35.webp", context: "커미션 | A5 | 책날개 | 시리즈 작업" },
     { title: "계절 틈새로", author: "트윈지", spine: 22, color: "#ddff4d", image: "archive(2)/2.webp", context: "레디메이드 | A5" },
-    { title: "마감과 영업 종료 사이", author: "물만두", spine: 22, color: "#4B78FF", image: "archive(2)/5.webp", context: "레디메이드 | A5 | 홀로그램박 | 목차 및 장표지 (A)" },
+    { title: "마감과 영업 종료 사이", author: "물만두", spine: 22, color: "#222222", image: "archive(2)/5.webp", context: "레디메이드 | A5 | 홀로그램박 | 목차 및 장표지 (A)" },
     { title: "순례자의 아가미", author: "BIKO", spine: 26, color: "#4B78FF", image: "archive(2)/31.webp", context: "레디메이드 | A5 | 목차 (2p)" },
     { title: "아이러닉 로맨틱", author: "BIKO", spine: 20, color: "#ddff4d", image: "archive(2)/30.webp", context: "레디메이드 | A5 | 중철" },
     { title: "시선 나누기", author: "BIKO", spine: 20, color: "#ddff4d", image: "archive(2)/29.webp", context: "레디메이드 | A5 | 약표제지" },
