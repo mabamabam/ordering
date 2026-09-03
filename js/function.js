@@ -36,7 +36,6 @@ document.addEventListener("DOMContentLoaded", function(){
             {unsold: "images/black/29.webp"},
             {unsold: "images/black/87.jpg"},
             {unsold: "images/blue/61.jpg"},
-            {unsold: "images/black/67.jpg"},
             {unsold: "images/black/57.jpg"},
             {unsold: "images/black/69.jpg"},
             {unsold: "images/white/44.jpg"},
