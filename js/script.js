@@ -57,6 +57,8 @@
     // { title: "검푸른 장막 너머로", author: "IZE", spine: 20, color: "#222222", image: "archive(2)/1.webp", context: "커미션 | A5" },
     // { title: "Cognitive Error", author: "403", spine: 30, color: "#ddff4d", image: "archive(2)/48.webp", context: "레디메이드 | A5" },
     // { title: "망사랑이 딱 좋아!", author: "앤솔로지", spine: 30, color: "#222222", image: "archive(2)/1.webp", context: "커미션 | A5 | 목차 및 장표지 (B) | 문진 굿즈" },
+    { title: "Afterimage", author: "403", spine: 20, color: "#ddff4d", image: "archive(2)/53.webp", context: "레디메이드 | A5 | 중철" },
+    { title: "Cognitive Error", author: "403", spine: 30, color: "#ddff4d", image: "archive(2)/52.webp", context: "레디메이드 | A5" },
     { title: "The Last Variable", author: "사과", spine: 23, color: "#ddff4d", image: "archive(2)/51.webp", context: "레디메이드 | A5" },
     { title: "파편의 향기", author: "늠", spine: 20, color: "#ddff4d", image: "archive(2)/50.webp", context: "레디메이드 | B6" },
     { title: "구조의 재구성", author: "낙오", spine: 20, color: "#222222", image: "archive(2)/49.webp", context: "레디메이드 | A5 | 오브젝트 변경" },
