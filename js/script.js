@@ -96,7 +96,7 @@
     { title: "폴리에스터 하트", author: "제이", spine: 28, color: "#ddff4d", image: "archive(2)/28.webp", context: "레디메이드 | A5" },
     { title: "소년찬가", author: "키튼", spine: 28, color: "#4B78FF", image: "archive(2)/6.webp", context: "레디메이드 | A5 | 책날개 | 레이아웃 변경 | 목차 및 장표지 | 책갈피 굿즈" },
     { title: "나의 꿈은 맑은 바람이 되어서", author: "@", spine: 20, color: "#222222", image: "archive(2)/38.webp", context: "포스터 | 오브젝트 추가" },
-    { title: "녹청의 하루는 오늘도 바쁘게 움직인다", author: "제이", spine: 22, color: "#ddff4d", image: "archive(2)/18.webp", context: "레디메이드 | B6" },
+    { title: "녹청의 하루는 오늘도 바쁘게 움직인다", author: "게게", spine: 22, color: "#ddff4d", image: "archive(2)/18.webp", context: "레디메이드 | B6" },
     { title: "산등성이 불빛에 피어나다", author: "사희", spine: 21, color: "#ddff4d", image: "archive(2)/8.webp", context: "레디메이드 | A5" },
     { title: "오류", author: "반포", spine: 20, color: "#ddff4d", image: "archive(2)/24.webp", context: "레디메이드 | A5" },
     { title: "산제물이 향하는 곳", author: "엘로", spine: 21, color: "#ddff4d", image: "archive(2)/27.webp", context: "레디메이드 | B6" },
