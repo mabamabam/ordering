@@ -290,6 +290,42 @@ body {
     animation: shake-jelly 1s ease;
 }
 
+.box12re {
+    width: 50%;
+    height: 700px;
+    position: relative;
+}
+
+.contact-info {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    text-align: right;
+}
+
+.contact-info .type2 {
+    font-weight: 500;
+}
+
+.contact-info .type2 a:hover {
+    color: #4B78FF;
+    transition: all 0.2s ease;
+}
+
+/* 커미션 신청 옆 텍스트는 좌측 하단에 배치 */
+.contact-info--bottom-left {
+    top: auto;
+    right: auto;
+    bottom: 40px;
+    left: 40px;
+    align-items: flex-start;
+    text-align: left;
+}
+
 /* 
 @keyframes shake {
     0%   { transform: translateX(0); }
@@ -455,7 +491,26 @@ footer {
         animation: shake-jelly 1s ease;
     }
 
+    .box12re {
+        width: 50%;
+        height: 270px;
+        position: relative;
+    }
 
+    .contact-info {
+        top: 14px;
+        right: 14px;
+        gap: 3px;
+    }
+
+    .contact-info .type2 {
+        font-size: 12px;
+    }
+
+    .contact-info--bottom-left {
+        bottom: 14px;
+        left: 14px;
+    }
 
 }
 
@@ -565,6 +620,27 @@ footer {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+    }
+
+    .box12re {
+        width: 50%;
+        height: 300px;
+        position: relative;
+    }
+
+    .contact-info {
+        top: 20px;
+        right: 20px;
+        gap: 4px;
+    }
+
+    .contact-info .type2 {
+        font-size: 15px;
+    }
+
+    .contact-info--bottom-left {
+        bottom: 20px;
+        left: 20px;
     }
 
 }
