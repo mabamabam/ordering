@@ -55,8 +55,7 @@
   const BOOKS_DATA = [
     // { title: "새벽이 드는 창가에", author: "IZE", spine: 20, color: "#222222", image: "archive(2)/1.webp", context: "커미션 | A5" },
     // { title: "검푸른 장막 너머로", author: "IZE", spine: 20, color: "#222222", image: "archive(2)/1.webp", context: "커미션 | A5" },
-    // { title: "Cognitive Error", author: "403", spine: 30, color: "#ddff4d", image: "archive(2)/48.webp", context: "레디메이드 | A5" },
-    // { title: "망사랑이 딱 좋아!", author: "앤솔로지", spine: 30, color: "#222222", image: "archive(2)/1.webp", context: "커미션 | A5 | 목차 및 장표지 (B) | 문진 굿즈" },
+    // { title: "망사랑이 딱 좋아!", author: "앤솔로지", spine: 30, color: "#222222", image: "img/6.webp", context: "커미션 | A5 | 목차 및 장표지 (B)" },
     { title: "盲視", author: "@", spine: 20, color: "#ddff4d", image: "archive(2)/54.webp", context: "레디메이드 | 웹소설 표지" },
     { title: "Afterimage", author: "403", spine: 20, color: "#ddff4d", image: "archive(2)/53.webp", context: "레디메이드 | A5 | 중철" },
     { title: "Cognitive Error", author: "403", spine: 30, color: "#ddff4d", image: "archive(2)/52.webp", context: "레디메이드 | A5" },
@@ -97,7 +96,7 @@
     { title: "폴리에스터 하트", author: "제이", spine: 28, color: "#ddff4d", image: "archive(2)/28.webp", context: "레디메이드 | A5" },
     { title: "소년찬가", author: "키튼", spine: 28, color: "#4B78FF", image: "archive(2)/6.webp", context: "레디메이드 | A5 | 책날개 | 레이아웃 변경 | 목차 및 장표지 | 책갈피 굿즈" },
     { title: "나의 꿈은 맑은 바람이 되어서", author: "@", spine: 20, color: "#222222", image: "archive(2)/38.webp", context: "포스터 | 오브젝트 추가" },
-    { title: "녹청의 하루는 오늘도 바쁘게 움직인다", author: "게게", spine: 22, color: "#ddff4d", image: "archive(2)/18.webp", context: "레디메이드 | B6" },
+    { title: "녹청의 하루는 오늘도 바쁘게 움직인다", author: "제이", spine: 22, color: "#ddff4d", image: "archive(2)/18.webp", context: "레디메이드 | B6" },
     { title: "산등성이 불빛에 피어나다", author: "사희", spine: 21, color: "#ddff4d", image: "archive(2)/8.webp", context: "레디메이드 | A5" },
     { title: "오류", author: "반포", spine: 20, color: "#ddff4d", image: "archive(2)/24.webp", context: "레디메이드 | A5" },
     { title: "산제물이 향하는 곳", author: "엘로", spine: 21, color: "#ddff4d", image: "archive(2)/27.webp", context: "레디메이드 | B6" },
@@ -289,9 +288,38 @@
     openBookModal(BOOKS_DATA[nextIndex], nextIndex);
   }
 
-  modal.querySelectorAll('[data-close]').forEach(el => {
-    el.addEventListener('click', closeModal);
-  });
+  // 모바일/태블릿 기준 너비 (CSS의 태블릿 반응형 구간과 동일하게 맞춤: ~1000px 이하)
+  const MOBILE_TABLET_MAX_WIDTH = 1000;
+  function isMobileOrTablet() {
+    return window.innerWidth <= MOBILE_TABLET_MAX_WIDTH;
+  }
+
+  // 닫기(X) 버튼은 화면 크기와 상관없이 항상 팝업을 닫음
+  const modalCloseBtn = modal.querySelector('.modal-close');
+  if (modalCloseBtn) {
+    modalCloseBtn.addEventListener('click', closeModal);
+  }
+
+  // 검은 배경(backdrop) 클릭 동작
+  //  - PC: 클릭 시 팝업 닫기 (기존 동작 유지)
+  //  - 모바일/태블릿: 화면을 좌/우 50%로 나눠 왼쪽 클릭 시 이전 자료, 오른쪽 클릭 시 다음 자료
+  //    (showRelativeBook은 처음/끝이 이어지는 순환 구조이므로 무한 열람 가능)
+  const modalBackdrop = modal.querySelector('.modal-backdrop');
+  if (modalBackdrop) {
+    modalBackdrop.addEventListener('click', (e) => {
+      if (isMobileOrTablet()) {
+        const halfWidth = window.innerWidth / 2;
+        if (e.clientX < halfWidth) {
+          showRelativeBook(-1); // 왼쪽 영역 → 이전 자료
+        } else {
+          showRelativeBook(1);  // 오른쪽 영역 → 다음 자료
+        }
+      } else {
+        closeModal();
+      }
+    });
+  }
+
   document.addEventListener('keydown', (e) => {
     if (!modal.classList.contains('is-open')) return;
     if (e.key === 'Escape') {
