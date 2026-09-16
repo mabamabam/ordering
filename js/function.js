@@ -92,6 +92,8 @@ document.addEventListener("DOMContentLoaded", function(){
             {unsold: "images/blue/99.jpg"},
             {unsold: "images/white/113.jpg"},
             {unsold: "images/white/104.jpg"},
+            {unsold: "images/white/149.webp"},
+            {unsold: "images/white/150.webp"},
             {unsold: "images/white/128.webp"},
             {unsold: "images/white/134.webp"},
             {unsold: "images/red/127.webp"},
