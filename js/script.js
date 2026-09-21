@@ -41,47 +41,50 @@
   /* --------------------------------------------------------------------
      2. 책장 섹션 — JSON 데이터를 읽어 책등 컴포넌트 생성
      -------------------------------------------------------------------- */
-  const shelfTrack = document.getElementById('shelfTrack');
   const modal = document.getElementById('bookModal');
   const modalImage = document.getElementById('modalImage');
   const modalTitle = document.getElementById('modalTitle');
   const modalAuthor = document.getElementById('modalAuthor');
   const modalContext = document.getElementById('modalContext');
 
-  // 현재 팝업에 열려 있는 책의 인덱스 (키보드 좌우 이동에 사용)
+  // 현재 팝업에 열려 있는 책의 위치 (어느 책장 + 몇 번째인지, 키보드 좌우 이동에 사용)
+  let currentShelfKey = null;
   let currentIndex = null;
 
-  // 책장 데이터 (원래 data/books.json 이었던 내용을 그대로 옮겨온 것)
+  /* ======================================================================
+     책장 DB — 섹션(챕터)별로 배열을 분리해서 관리합니다.
+     새 책을 추가/수정하고 싶으면 해당 섹션의 배열에만 객체를 넣으면 됩니다.
+     각 책 객체 형식: { title, author, spine, color, image, context }
+     ====================================================================== */
+
+  // 1) 무선제본 | 하드커버 (원래 data/books.json 이었던 내용을 그대로 옮겨온 것)
   const BOOKS_DATA = [
     // { title: "새벽이 드는 창가에", author: "IZE", spine: 20, color: "#222222", image: "archive(2)/1.webp", context: "커미션 | A5" },
     // { title: "검푸른 장막 너머로", author: "IZE", spine: 20, color: "#222222", image: "archive(2)/1.webp", context: "커미션 | A5" },
     // { title: "망사랑이 딱 좋아!", author: "앤솔로지", spine: 30, color: "#222222", image: "img/6.webp", context: "커미션 | A5 | 목차 및 장표지 (B)" },
-    { title: "혹등고래의 노래", author: "lacuna", spine: 23, color: "#222222", image: "archive(2)/57.webp", context: "레디메이드 | B6 | 오브젝트 추가" },
+    // { title: "잠들지 못하는", author: "목가", spine: 22, color: "#222222", image: "archive(2)/59.webp", context: "커미션 | A5" },
+    // { title: "물결의 이면에게", author: "연근", spine: 23, color: "#222222", image: "archive(2)/59.webp", context: "레디메이드 | B6" },
+    // { title: "총기 사용 수칙", author: "돼지고기만두", spine: 22, color: "#4B78FF", image: "archive(2)/58.webp", context: "레디메이드 | B5 | 목차 (2p)" },
+    { title: "혹등고래의 노래", author: "lacuna", spine: 22, color: "#222222", image: "archive(2)/57.webp", context: "레디메이드 | B6 | 오브젝트 추가" },
     { title: "포말의 기록", author: "타피", spine: 22, color: "#4B78FF", image: "archive(2)/56.webp", context: "레디메이드 | A5 | 목차 (1p)" },
     { title: "보호자전화면담", author: "켇", spine: 20, color: "#ddff4d", image: "archive(2)/55.webp", context: "레디메이드 | B6" },
-    { title: "盲視", author: "@", spine: 20, color: "#ddff4d", image: "archive(2)/54.webp", context: "레디메이드 | 웹소설 표지" },
-    { title: "Afterimage", author: "403", spine: 20, color: "#ddff4d", image: "archive(2)/53.webp", context: "레디메이드 | A5 | 중철" },
     { title: "Cognitive Error", author: "403", spine: 30, color: "#ddff4d", image: "archive(2)/52.webp", context: "레디메이드 | A5" },
     { title: "The Last Variable", author: "사과", spine: 23, color: "#ddff4d", image: "archive(2)/51.webp", context: "레디메이드 | A5" },
     { title: "파편의 향기", author: "늠", spine: 20, color: "#ddff4d", image: "archive(2)/50.webp", context: "레디메이드 | B6" },
     { title: "구조의 재구성", author: "낙오", spine: 20, color: "#222222", image: "archive(2)/49.webp", context: "레디메이드 | A5 | 오브젝트 변경" },
     { title: "소드마스터는 대화로 해결하지 않는다", author: "앤솔로지", spine: 30, color: "#4B78FF", image: "archive(2)/48.webp", context: "레디메이드 | A5 | 목차 및 장표지 (B)" },
     { title: "사계", author: "실행 외 3인", spine: 20, color: "#ddff4d", image: "archive(2)/47.webp", context: "레디메이드 | A5" },
-    { title: "Perfect way to kill the boss", author: "이바나", spine: 20, color: "#ddff4d", image: "archive(2)/46.webp", context: "레디메이드 | 웹소설 표지" },
-    { title: "상사를죽이는완벽한방법", author: "이바나", spine: 20, color: "#ddff4d", image: "archive(2)/45.webp", context: "레디메이드 | 웹소설 표지" },
     { title: "우리는 여전히", author: "게스트북", spine: 30, color: "#ddff4d", image: "archive(2)/42.webp", context: "레디메이드 | A5" },
     { title: "데자뷰", author: "홍", spine: 20, color: "#ddff4d", image: "archive(2)/41.webp", context: "레디메이드 | A5" },
     { title: "청춘의 바깥", author: "미지", spine: 23, color: "#4B78FF", image: "archive(2)/43.webp", context: "레디메이드 | 비판형 | 목차 및 장표지 (A)" },
     { title: "어떤 세계", author: "@", spine: 20, color: "#ddff4d", image: "archive(2)/40.webp", context: "레디메이드 | A5" },
     { title: "Touch ①", author: "하얀꿈", spine: 30, color: "#222222", image: "archive(2)/35.webp", context: "커미션 | A5 | 책날개 | 시리즈 작업" },
-    { title: "Touch ②", author: "하얀꿈", spine: 30, color: "#222222", image: "archive(2)/35.webp", context: "커미션 | A5 | 책날개 | 시리즈 작업" },
+    { title: "Touch ②", author: "하얀꿈", spine: 30, color: "#222222", image: "archive(2)/59.webp", context: "커미션 | A5 | 책날개 | 시리즈 작업" },
     { title: "계절 틈새로", author: "트윈지", spine: 22, color: "#ddff4d", image: "archive(2)/2.webp", context: "레디메이드 | A5" },
     { title: "마감과 영업 종료 사이", author: "물만두", spine: 22, color: "#222222", image: "archive(2)/5.webp", context: "레디메이드 | A5 | 홀로그램박 | 목차 및 장표지 (A)" },
     { title: "순례자의 아가미", author: "BIKO", spine: 26, color: "#4B78FF", image: "archive(2)/31.webp", context: "레디메이드 | A5 | 목차 (2p)" },
-    { title: "아이러닉 로맨틱", author: "BIKO", spine: 20, color: "#ddff4d", image: "archive(2)/30.webp", context: "레디메이드 | A5 | 중철" },
     { title: "시선 나누기", author: "BIKO", spine: 20, color: "#ddff4d", image: "archive(2)/29.webp", context: "레디메이드 | A5 | 약표제지" },
     { title: "Icarus", author: "R", spine: 22, color: "#4B78FF", image: "archive(2)/1.webp", context: "레디메이드 | B6 | 목차 및 장표지 (A)" },
-    { title: "막간", author: "늠", spine: 20, color: "#222222", image: "archive(2)/3.webp", context: "레디메이드 | A5 | 중철 | 글엽서 굿즈" },
     { title: "이물감", author: "서민경", spine: 20, color: "#222222", image: "archive(2)/39.webp", context: "레디메이드 | 비판형 | 하드커버" },
     { title: "랑데부 포인트", author: "PAYLOR", spine: 27, color: "#222222", image: "archive(2)/34.webp", context: "커미션 | A5" },
     { title: "하나 둘 셋", author: "일서", spine: 25, color: "#ddff4d", image: "archive(2)/19.webp", context: "레디메이드 | B6" },
@@ -90,30 +93,57 @@
     { title: "관외대출", author: "99", spine: 29, color: "#222222", image: "archive(2)/32.webp", context: "일러스트 편집 커미션 | 비판형 | 목차 및 장표지 (B)" },
     { title: "비정형 메타포", author: "노을", spine: 22, color: "#ddff4d", image: "archive(2)/17.webp", context: "레디메이드 | B6" },
     { title: "궤도 이탈하기", author: "앤솔로지", spine: 21, color: "#222222", image: "archive(2)/20.webp", context: "레디메이드 | A5 | 책날개" },
-    { title: "황금시간", author: "목가", spine: 20, color: "#ddff4d", image: "archive(2)/23.webp", context: "레디메이드 | A5 | 중철" },
-    { title: "가랑눈 내리는 집", author: "제행무상", spine: 21, color: "#ddff4d", image: "archive(2)/21.webp", context: "레디메이드 | B6 | 중철" },
+    { title: "가랑눈 내리는 집", author: "제행무상", spine: 21, color: "#ddff4d", image: "archive(2)/21.webp", context: "레디메이드 | B6" },
     { title: "무덤팔아 부르주암", author: "딩", spine: 20, color: "#ddff4d", image: "archive(2)/22.webp", context: "레디메이드 | A5" },
     { title: "당신이 바꿀 수 있는 것", author: "M0icy_forever", spine: 20, color: "#222222", image: "archive(2)/33.webp", context: "커미션 | A5" },
-    { title: "시간이 멈춘 자리에 우리가 남아서", author: "1열", spine: 20, color: "#222222", image: "archive(2)/44.webp", context: "레디메이드 | B6 | 중철 | 레이아웃 변경" },
     { title: "TRIPLE", author: "Authentic", spine: 20, color: "#ddff4d", image: "archive(2)/25.webp", context: "레디메이드 | A5" },
     { title: "폴리에스터 하트", author: "제이", spine: 28, color: "#ddff4d", image: "archive(2)/28.webp", context: "레디메이드 | A5" },
     { title: "소년찬가", author: "키튼", spine: 28, color: "#4B78FF", image: "archive(2)/6.webp", context: "레디메이드 | A5 | 책날개 | 레이아웃 변경 | 목차 및 장표지 | 책갈피 굿즈" },
-    { title: "나의 꿈은 맑은 바람이 되어서", author: "@", spine: 20, color: "#222222", image: "archive(2)/38.webp", context: "포스터 | 오브젝트 추가" },
     { title: "녹청의 하루는 오늘도 바쁘게 움직인다", author: "제이", spine: 22, color: "#ddff4d", image: "archive(2)/18.webp", context: "레디메이드 | B6" },
     { title: "산등성이 불빛에 피어나다", author: "사희", spine: 21, color: "#ddff4d", image: "archive(2)/8.webp", context: "레디메이드 | A5" },
     { title: "오류", author: "반포", spine: 20, color: "#ddff4d", image: "archive(2)/24.webp", context: "레디메이드 | A5" },
     { title: "산제물이 향하는 곳", author: "엘로", spine: 21, color: "#ddff4d", image: "archive(2)/27.webp", context: "레디메이드 | B6" },
     { title: "연정의 입방체", author: "또또7", spine: 20, color: "#ddff4d", image: "archive(2)/12.webp", context: "레디메이드 | A5" },
-    { title: "Deferred Alpha", author: "양피지", spine: 20, color: "#ddff4d", image: "archive(2)/37.webp", context: "레디메이드 | 웹소설 표지" },
     { title: "단편선", author: "튜즈", spine: 20, color: "#ddff4d", image: "archive(2)/11.webp", context: "레디메이드 | A5" },
     { title: "락앤롤베이비", author: "우물안두꺼비", spine: 27, color: "#4B78FF", image: "archive(2)/16.webp", context: "레디메이드 | 비판형 | 목차 및 장표지 (B)" },
     { title: "어떤 감정의 비가역성에 대하여", author: "한여름밤의 괴담", spine: 22, color: "#ddff4d", image: "archive(2)/10.webp", context: "레디메이드 | A5 | 목차 및 장표지 (A)" },
+    { title: "검푸른 장막 너머로", author: "IZE", spine: 20, color: "#ddff4d", image: "archive(2)/7.webp", context: "레디메이드 | A5" },
     { title: "Wildest Dreams", author: "나리", spine: 25, color: "#ddff4d", image: "archive(2)/15.webp", context: "레디메이드 | A5" },
     { title: "99%토마토주스공급사건", author: "소람", spine: 21, color: "#4B78FF", image: "archive(2)/14.webp", context: "레디메이드 | A5 | 약표제지" },
     { title: "Lucky Strike", author: "유카", spine: 21, color: "#4B78FF", image: "archive(2)/13.webp", context: "레디메이드 | A5 | 장표지 (A)" },
     { title: "Find our way to Love Ending", author: "Kim10000tang", spine: 21, color: "#ddff4d", image: "archive(2)/9.webp", context: "레디메이드 | A5" },
+  ];
+
+  // 2) 중철제본
+  const JECHEOL_DATA = [
+    { title: "Afterimage", author: "403", spine: 20, color: "#ddff4d", image: "archive(2)/53.webp", context: "레디메이드 | A5 | 중철" },
+    { title: "아이러닉 로맨틱", author: "BIKO", spine: 20, color: "#ddff4d", image: "archive(2)/30.webp", context: "레디메이드 | A5 | 중철" },
+    { title: "막간", author: "늠", spine: 20, color: "#222222", image: "archive(2)/3.webp", context: "레디메이드 | A5 | 중철 | 글엽서 굿즈" },
+    { title: "황금시간", author: "목가", spine: 20, color: "#ddff4d", image: "archive(2)/23.webp", context: "레디메이드 | A5 | 중철" },
+    { title: "시간이 멈춘 자리에 우리가 남아서", author: "1열", spine: 20, color: "#222222", image: "archive(2)/44.webp", context: "레디메이드 | B6 | 중철 | 오브젝트 추가" },
+  ];
+
+  // 3) 웹소설
+  const WEBNOVEL_DATA = [
+    { title: "盲視", author: "@", spine: 20, color: "#ddff4d", image: "archive(2)/54.webp", context: "레디메이드 | 웹소설 표지" },
+    { title: "Perfect way to kill the boss", author: "이바나", spine: 20, color: "#ddff4d", image: "archive(2)/46.webp", context: "레디메이드 | 웹소설 표지" },
+    { title: "상사를 죽이는 완벽한 방법", author: "이바나", spine: 20, color: "#ddff4d", image: "archive(2)/45.webp", context: "레디메이드 | 웹소설 표지" },
+    { title: "Deferred Alpha", author: "양피지", spine: 20, color: "#ddff4d", image: "archive(2)/37.webp", context: "레디메이드 | 웹소설 표지" },
     { title: "수란은 어렵다", author: "@", spine: 20, color: "#ddff4d", image: "archive(2)/36.webp", context: "레디메이드 | 웹소설 표지" },
   ];
+
+  // 책장 섹션 정의: HTML의 shelf-track id ↔ 위 데이터 배열을 매핑
+  // (섹션을 더 추가하려면 HTML에 shelf-wrap/shelf-track을 만들고 여기에 한 줄만 추가)
+  const SHELVES = [
+    { key: 'main',     trackId: 'shelfTrack',          data: BOOKS_DATA },
+    { key: 'jecheol',  trackId: 'shelfTrack-jecheol',  data: JECHEOL_DATA },
+    { key: 'webnovel', trackId: 'shelfTrack-webnovel', data: WEBNOVEL_DATA },
+  ];
+
+  function getShelfData(key) {
+    const shelf = SHELVES.find(s => s.key === key);
+    return shelf ? shelf.data : [];
+  }
 
   /* --------------------------------------------------------------------
      1. 이미지 프리로드 — 책 사진들을 미리 전부 받아둬서
@@ -138,7 +168,8 @@
     return Promise.all(loaders);
   }
 
-  preloadBookImages(BOOKS_DATA).then(() => {
+  const ALL_BOOKS = SHELVES.flatMap(s => s.data);
+  preloadBookImages(ALL_BOOKS).then(() => {
     imagesReady = true;
   });
 
@@ -160,7 +191,7 @@
     return Math.round(outMin + ratio * (outMax - outMin));
   }
 
-  function createBookEl(book, i) {
+  function createBookEl(book, i, shelfKey) {
     const el = document.createElement('button');
     el.type = 'button';
     el.className = `book ${colorClass(book.color)}`;
@@ -177,7 +208,7 @@
     // PC/태블릿/모바일 모든 환경에서 클릭(탭)으로만 팝업이 열림
     el.addEventListener('click', () => {
       if (!imagesReady) return;
-      openBookModal(book, i);
+      openBookModal(shelfKey, book, i);
     });
 
     return el;
@@ -203,21 +234,33 @@
   /* --------------------------------------------------------------------
      책의 개수에 따라 책장을 여러 줄로 자동 분할 (좌우 스크롤 없이,
      한 줄이 넘치면 그 아래에 새 책장을 하나 더 생성)
+     섹션(SHELVES)마다 독립적으로 동일한 로직을 적용합니다.
      -------------------------------------------------------------------- */
-  const shelfWrapEl = shelfTrack.closest('.shelf-wrap');
 
-  // 원래 HTML에 있던 shelfTrack / shelf-board 한 쌍을 "행(row)" 구조로 감싸기
-  (function wrapFirstRow() {
-    const firstBoard = shelfWrapEl.querySelector('.shelf-board');
-    const firstRow = document.createElement('div');
-    firstRow.className = 'shelf-row';
-    shelfWrapEl.insertBefore(firstRow, shelfTrack);
-    firstRow.appendChild(shelfTrack);
-    if (firstBoard) firstRow.appendChild(firstBoard);
-  })();
+  // 각 섹션의 shelf-track을 찾아 wrapEl과 함께 초기 구조("행" 감싸기)를 세팅
+  function initShelf(shelf) {
+    const track = document.getElementById(shelf.trackId);
+    if (!track) return null; // 아직 HTML에 해당 섹션이 없으면 건너뜀
+    const wrapEl = track.closest('.shelf-wrap');
 
-  function layoutShelves() {
-    const rows = shelfWrapEl.querySelectorAll('.shelf-row');
+    // 원래 HTML에 있던 track / shelf-board 한 쌍을 "행(row)" 구조로 감싸기
+    (function wrapFirstRow() {
+      const firstBoard = wrapEl.querySelector('.shelf-board');
+      const firstRow = document.createElement('div');
+      firstRow.className = 'shelf-row';
+      wrapEl.insertBefore(firstRow, track);
+      firstRow.appendChild(track);
+      if (firstBoard) firstRow.appendChild(firstBoard);
+    })();
+
+    return Object.assign({}, shelf, { wrapEl });
+  }
+
+  const initializedShelves = SHELVES.map(initShelf).filter(Boolean);
+
+  function layoutShelf(shelf) {
+    const { wrapEl, data, key } = shelf;
+    const rows = wrapEl.querySelectorAll('.shelf-row');
     // 첫 번째 행은 재사용(비우기), 나머지는 제거하고 다시 생성
     rows.forEach((row, idx) => {
       if (idx === 0) {
@@ -227,7 +270,7 @@
       }
     });
 
-    const firstTrack = shelfWrapEl.querySelector('.shelf-track');
+    const firstTrack = wrapEl.querySelector('.shelf-track');
     const trackStyles = getComputedStyle(firstTrack);
     const paddingX = parseFloat(trackStyles.paddingLeft) + parseFloat(trackStyles.paddingRight);
     const availableWidth = Math.max(0, firstTrack.clientWidth - paddingX);
@@ -235,36 +278,41 @@
     let currentTrack = firstTrack;
     let currentWidth = 0;
 
-    BOOKS_DATA.forEach((book, i) => {
+    data.forEach((book, i) => {
       const w = spineWidth(book.spine);
 
       // 책을 추가했을 때 넘친다고 판단되면(오버플로우) 책장을 아래에 하나 더 생성
       if (currentWidth > 0 && currentWidth + w > availableWidth) {
         const { row, track } = createShelfRow();
-        shelfWrapEl.appendChild(row);
+        wrapEl.appendChild(row);
         currentTrack = track;
         currentWidth = 0;
       }
 
-      currentTrack.appendChild(createBookEl(book, i));
+      currentTrack.appendChild(createBookEl(book, i, key));
       currentWidth += w;
     });
   }
 
-  layoutShelves();
+  function layoutAllShelves() {
+    initializedShelves.forEach(layoutShelf);
+  }
+
+  layoutAllShelves();
 
   // 화면 크기가 바뀌면(반응형 구간 전환 등) 책장을 다시 계산
   let resizeTimer = null;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(layoutShelves, 150);
+    resizeTimer = setTimeout(layoutAllShelves, 150);
   });
 
-  function openBookModal(book, i) {
+  function openBookModal(shelfKey, book, i) {
     const img = book.image && book.image.trim()
       ? book.image
       : placeholderDataUri(2000, 1500, book.title || `작업물 ${i + 1}`, '#f1f1f1', '#999999');
 
+    currentShelfKey = shelfKey;
     currentIndex = i;
     modalImage.src = img;
     modalImage.alt = book.title || '';
@@ -279,16 +327,20 @@
     modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden', 'true');
     modalImage.src = '';
+    currentShelfKey = null;
     currentIndex = null;
   }
 
   // 팝업이 열려 있는 동안 좌우 화살표로 이전/다음 책으로 자유롭게 이동
-  // (마지막 책에서 오른쪽으로 가면 처음으로, 첫 책에서 왼쪽으로 가면 마지막으로 순환)
+  // (같은 책장 섹션 안에서만 이동하며, 마지막 책에서 오른쪽으로 가면 처음으로,
+  //  첫 책에서 왼쪽으로 가면 마지막으로 순환)
   function showRelativeBook(step) {
-    if (currentIndex === null || !imagesReady) return;
-    const len = BOOKS_DATA.length;
+    if (currentIndex === null || currentShelfKey === null || !imagesReady) return;
+    const data = getShelfData(currentShelfKey);
+    const len = data.length;
+    if (len === 0) return;
     const nextIndex = (currentIndex + step + len) % len;
-    openBookModal(BOOKS_DATA[nextIndex], nextIndex);
+    openBookModal(currentShelfKey, data[nextIndex], nextIndex);
   }
 
   // 모바일/태블릿 기준 너비 (CSS의 태블릿 반응형 구간과 동일하게 맞춤: ~1000px 이하)
