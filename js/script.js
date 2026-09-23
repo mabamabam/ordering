@@ -63,8 +63,8 @@
     // { title: "검푸른 장막 너머로", author: "IZE", spine: 20, color: "#222222", image: "archive(2)/1.webp", context: "커미션 | A5" },
     // { title: "망사랑이 딱 좋아!", author: "앤솔로지", spine: 30, color: "#222222", image: "img/6.webp", context: "커미션 | A5 | 목차 및 장표지 (B)" },
     // { title: "잠들지 못하는", author: "목가", spine: 22, color: "#222222", image: "archive(2)/59.webp", context: "커미션 | A5" },
-    // { title: "물결의 이면에게", author: "연근", spine: 23, color: "#222222", image: "archive(2)/59.webp", context: "레디메이드 | B6" },
-    // { title: "총기 사용 수칙", author: "돼지고기만두", spine: 22, color: "#4B78FF", image: "archive(2)/58.webp", context: "레디메이드 | B5 | 목차 (2p)" },
+    { title: "물결의 이면에게", author: "연근", spine: 23, color: "#222222", image: "archive(2)/60.webp", context: "레디메이드 | B6 | 목차 및 장표지 (A)" },
+    { title: "총기 사용 수칙", author: "돼지고기만두", spine: 22, color: "#4B78FF", image: "archive(2)/58.webp", context: "레디메이드 | B6 | 목차 (2p)" },
     { title: "혹등고래의 노래", author: "lacuna", spine: 22, color: "#222222", image: "archive(2)/57.webp", context: "레디메이드 | B6 | 오브젝트 추가" },
     { title: "포말의 기록", author: "타피", spine: 22, color: "#4B78FF", image: "archive(2)/56.webp", context: "레디메이드 | A5 | 목차 (1p)" },
     { title: "보호자전화면담", author: "켇", spine: 20, color: "#ddff4d", image: "archive(2)/55.webp", context: "레디메이드 | B6" },
@@ -99,7 +99,7 @@
     { title: "TRIPLE", author: "Authentic", spine: 20, color: "#ddff4d", image: "archive(2)/25.webp", context: "레디메이드 | A5" },
     { title: "폴리에스터 하트", author: "제이", spine: 28, color: "#ddff4d", image: "archive(2)/28.webp", context: "레디메이드 | A5" },
     { title: "소년찬가", author: "키튼", spine: 28, color: "#4B78FF", image: "archive(2)/6.webp", context: "레디메이드 | A5 | 책날개 | 레이아웃 변경 | 목차 및 장표지 | 책갈피 굿즈" },
-    { title: "녹청의 하루는 오늘도 바쁘게 움직인다", author: "제이", spine: 22, color: "#ddff4d", image: "archive(2)/18.webp", context: "레디메이드 | B6" },
+    { title: "녹청의 하루는 오늘도 바쁘게 움직인다", author: "게게", spine: 22, color: "#ddff4d", image: "archive(2)/18.webp", context: "레디메이드 | B6" },
     { title: "산등성이 불빛에 피어나다", author: "사희", spine: 21, color: "#ddff4d", image: "archive(2)/8.webp", context: "레디메이드 | A5" },
     { title: "오류", author: "반포", spine: 20, color: "#ddff4d", image: "archive(2)/24.webp", context: "레디메이드 | A5" },
     { title: "산제물이 향하는 곳", author: "엘로", spine: 21, color: "#ddff4d", image: "archive(2)/27.webp", context: "레디메이드 | B6" },
@@ -125,6 +125,7 @@
 
   // 3) 웹소설
   const WEBNOVEL_DATA = [
+    { title: "이단자들", author: "이바나", spine: 20, color: "#222222", image: "archive(2)/61.webp", context: "레디메이드 | 웹소설 표지" },
     { title: "盲視", author: "@", spine: 20, color: "#ddff4d", image: "archive(2)/54.webp", context: "레디메이드 | 웹소설 표지" },
     { title: "Perfect way to kill the boss", author: "이바나", spine: 20, color: "#ddff4d", image: "archive(2)/46.webp", context: "레디메이드 | 웹소설 표지" },
     { title: "상사를 죽이는 완벽한 방법", author: "이바나", spine: 20, color: "#ddff4d", image: "archive(2)/45.webp", context: "레디메이드 | 웹소설 표지" },
