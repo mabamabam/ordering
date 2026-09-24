@@ -1,6 +1,3 @@
-
-
-
 document.addEventListener("DOMContentLoaded", function(){
 
         // 도마뱀
@@ -27,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function(){
         const gallery = document.getElementById("gallery");
 
         const galleryData = [
-                        {unsold: "images/red/25.jpg"},
+            {unsold: "images/red/25.jpg"},
             {unsold: "images/black/15.jpg"},
             {unsold: "images/black/73.jpg"},
             {unsold: "images/black/85.jpg"},
@@ -75,7 +72,6 @@ document.addEventListener("DOMContentLoaded", function(){
             {unsold: "images/blue/64.jpg"},
             {unsold: "images/blue/40.webp"},
             {unsold: "images/blue/148.webp"},
-            {unsold: "images/blue/120.jpg"},
             {unsold: "images/blue/101.jpg"},
             {unsold: "images/blue/153.webp"},
             {unsold: "images/blue/125.jpg"},
@@ -86,11 +82,12 @@ document.addEventListener("DOMContentLoaded", function(){
             {unsold: "images/blue/81.jpg"},
             {unsold: "images/blue/86.jpg"},
             {unsold: "images/blue/100.jpg"},
-            {unsold: "images/black/79.jpg"},
+            {unsold: "images/blue/27.jpg"},
             {unsold: "images/blue/45.jpg"},
             {unsold: "images/white/136.webp"},
-            {unsold: "images/blue/27.jpg"},
+            {unsold: "images/blue/154.webp"},
             {unsold: "images/blue/46.webp"},
+            {unsold: "images/blue/120.webp"},
             {unsold: "images/blue/8.jpg"},
             {unsold: "images/blue/105.jpg"},
             {unsold: "images/blue/99.jpg"},
@@ -115,6 +112,7 @@ document.addEventListener("DOMContentLoaded", function(){
             {unsold: "images/yell/119.jpg"},
             {unsold: "images/white/126.jpg"},
             {unsold: "images/white/4.jpg"},
+            {unsold: "images/black/79.jpg"},
         ];
 
         function renderGallery() {
