@@ -63,6 +63,7 @@
     // { title: "검푸른 장막 너머로", author: "IZE", spine: 20, color: "#222222", image: "archive(2)/1.webp", context: "커미션 | A5" },
     // { title: "망사랑이 딱 좋아!", author: "앤솔로지", spine: 30, color: "#222222", image: "img/6.webp", context: "커미션 | A5 | 목차 및 장표지 (B)" },
     // { title: "잠들지 못하는", author: "목가", spine: 22, color: "#222222", image: "archive(2)/59.webp", context: "커미션 | A5" },
+    { title: "Distortion", author: "햄빵", spine: 23, color: "#222222", image: "archive(2)/62.webp", context: "일러스트 편집 커미션 | A5" },
     { title: "물결의 이면에게", author: "연근", spine: 23, color: "#222222", image: "archive(2)/60.webp", context: "레디메이드 | B6 | 목차 및 장표지 (A)" },
     { title: "총기 사용 수칙", author: "돼지고기만두", spine: 22, color: "#4B78FF", image: "archive(2)/58.webp", context: "레디메이드 | B6 | 목차 (2p)" },
     { title: "혹등고래의 노래", author: "lacuna", spine: 22, color: "#222222", image: "archive(2)/57.webp", context: "레디메이드 | B6 | 오브젝트 추가" },
@@ -175,7 +176,7 @@
   });
 
   function truncateTitle(title) {
-    return title.length > 9 ? title.slice(0, 9) + '…' : title;
+    return title.length > 10 ? title.slice(0, 10) + '…' : title;
   }
 
   function colorClass(hex) {
