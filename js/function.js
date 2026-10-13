@@ -72,7 +72,6 @@ document.addEventListener("DOMContentLoaded", function(){
             {unsold: "images/blue/64.jpg"},
             {unsold: "images/blue/40.webp"},
             {unsold: "images/blue/148.webp"},
-            {unsold: "images/blue/101.jpg"},
             {unsold: "images/blue/153.webp"},
             {unsold: "images/blue/125.jpg"},
             {unsold: "images/blue/33.jpg"},
@@ -111,7 +110,6 @@ document.addEventListener("DOMContentLoaded", function(){
             {unsold: "images/yell/43.jpg"},
             {unsold: "images/yell/119.jpg"},
             {unsold: "images/white/126.jpg"},
-            {unsold: "images/white/4.jpg"},
             {unsold: "images/black/79.jpg"},
         ];
 
