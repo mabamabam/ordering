@@ -126,6 +126,7 @@
 
   // 3) 웹소설
   const WEBNOVEL_DATA = [
+    { title: "미지의 걸작", author: "소조금", spine: 20, color: "#222222", image: "archive(2)/64.webp", context: "레디메이드 | 웹소설 표지 | 오브젝트 변경" },
     { title: "이단자들", author: "이바나", spine: 20, color: "#222222", image: "archive(2)/61.webp", context: "레디메이드 | 웹소설 표지" },
     { title: "盲視", author: "@", spine: 20, color: "#ddff4d", image: "archive(2)/54.webp", context: "레디메이드 | 웹소설 표지" },
     { title: "Perfect way to kill the boss", author: "이바나", spine: 20, color: "#ddff4d", image: "archive(2)/46.webp", context: "레디메이드 | 웹소설 표지" },
