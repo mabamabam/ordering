@@ -87,6 +87,8 @@ document.addEventListener("DOMContentLoaded", function(){
             {unsold: "images/blue/156.webp"},
             {unsold: "images/blue/105.jpg"},
             {unsold: "images/blue/99.jpg"},
+            {unsold: "images/blue/160.webp"},
+            {unsold: "images/white/161.webp"},
             {unsold: "images/white/86.webp"},
             {unsold: "images/white/113.jpg"},
             {unsold: "images/white/104.jpg"},
