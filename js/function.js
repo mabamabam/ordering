@@ -66,7 +66,6 @@ document.addEventListener("DOMContentLoaded", function(){
             {unsold: "images/blue/111.jpg"},
             {unsold: "images/blue/145.webp"},
             {unsold: "images/blue/157.webp"},
-            {unsold: "images/blue/11.webp"},
             {unsold: "images/blue/64.jpg"},
             {unsold: "images/blue/40.webp"},
             {unsold: "images/blue/148.webp"},
