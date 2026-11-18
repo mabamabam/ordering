@@ -29,6 +29,10 @@ document.addEventListener("DOMContentLoaded", function(){
    쪽(page) 형식: { src:"이미지경로" } | { text:"문구" } | { paper:"#색상" } | {} (빈 종이) */
 const BOOK_DATA = {
       "spreads": [
+        { "left": { "src": "pages/11-0.webp" }, "right": { "src": "pages/11-1.webp" },
+          "info": { "type": "Type A ; 사진 타입", "desc": "차례 (1p)", "title": "[ 미성년들 ]" } },
+        { "left": { "src": "pages/11-2.webp" }, "right": { "src": "pages/11-3.webp" },
+          "info": { "type": "Type A ; 사진 타입", "desc": "흑백 장표지", "title": "[ 미성년들 ]" } },
         { "left": { "src": "pages/139-1.webp" }, "right": { "src": "pages/139-2.webp" },
           "info": { "type": "Type A ; 사진 타입", "desc": "차례 (2p)", "title": "[ 물결의 이면에게 ]" } },
         { "left": { "src": "pages/139-3.webp" }, "right": { "src": "pages/139-4.webp" },
