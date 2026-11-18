@@ -62,6 +62,8 @@
     // { title: "새벽이 드는 창가에", author: "IZE", spine: 20, color: "#222222", image: "archive(2)/1.webp", context: "커미션 | A5" },
     // { title: "검푸른 장막 너머로", author: "IZE", spine: 20, color: "#222222", image: "archive(2)/1.webp", context: "커미션 | A5" },
     // { title: "잠들지 못하는", author: "목가", spine: 22, color: "#222222", image: "archive(2)/59.webp", context: "커미션 | A5" },
+    { title: "추락의 파편", author: "사모/이재", spine: 26, color: "#ddff4d", image: "archive(2)/67.webp", context: "레디메이드 | A5 | 하드커버" },
+    { title: "미未성년들", author: "락희", spine: 26, color: "#ddff4d", image: "archive(2)/66.webp", context: "레디메이드 | A5" },
     { title: "송곳니", author: "산산", spine: 24, color: "#ddff4d", image: "archive(2)/65.webp", context: "레디메이드 | A5 | 하드커버" },
     { title: "Distortion", author: "햄빵", spine: 23, color: "#222222", image: "archive(2)/62.webp", context: "일러스트 편집 커미션 | A5" },
     { title: "물결의 이면에게", author: "연근", spine: 23, color: "#222222", image: "archive(2)/60.webp", context: "레디메이드 | B6 | 목차 및 장표지 (A)" },
