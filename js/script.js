@@ -61,7 +61,7 @@
   const BOOKS_DATA = [
     // { title: "새벽이 드는 창가에", author: "IZE", spine: 20, color: "#222222", image: "archive(2)/1.webp", context: "커미션 | A5" },
     // { title: "검푸른 장막 너머로", author: "IZE", spine: 20, color: "#222222", image: "archive(2)/1.webp", context: "커미션 | A5" },
-    // { title: "잠들지 못하는", author: "목가", spine: 22, color: "#222222", image: "archive(2)/59.webp", context: "커미션 | A5" },
+    { title: "잠들 수 있는 새벽으로", author: "목가", spine: 20, color: "#222222", image: "archive(2)/69.webp", context: "커미션 | A5" },
     { title: "추락의 파편", author: "사모/이재", spine: 26, color: "#ddff4d", image: "archive(2)/67.webp", context: "레디메이드 | A5 | 하드커버" },
     { title: "미未성년들", author: "락희", spine: 26, color: "#ddff4d", image: "archive(2)/66.webp", context: "레디메이드 | A5" },
     { title: "송곳니", author: "산산", spine: 24, color: "#ddff4d", image: "archive(2)/65.webp", context: "레디메이드 | A5 | 하드커버" },
@@ -119,6 +119,7 @@
 
   // 2) 중철제본
   const JECHEOL_DATA = [
+    { title: "후카츠 카즈나리 실종 사건", author: "비터", spine: 20, color: "#ddff4d", image: "archive(2)/68.webp", context: "레디메이드 | B6 | 중철" },
     { title: "상실", author: "일비", spine: 20, color: "#ddff4d", image: "archive(2)/63.webp", context: "레디메이드 | B6 | 중철" },
     { title: "Afterimage", author: "403", spine: 20, color: "#ddff4d", image: "archive(2)/53.webp", context: "레디메이드 | A5 | 중철" },
     { title: "아이러닉 로맨틱", author: "BIKO", spine: 20, color: "#ddff4d", image: "archive(2)/30.webp", context: "레디메이드 | A5 | 중철" },
